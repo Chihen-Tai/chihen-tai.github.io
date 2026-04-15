@@ -1,0 +1,46 @@
+/* css/tokens.css */
+:root {
+  /* Background */
+  --bg-base:        #0d1130;
+  --bg-nav:         rgba(13, 15, 42, 0.98);
+  --bg-footer:      #0a0e28;
+
+  /* Bento block backgrounds */
+  --bg-indigo:      #181e50;
+  --bg-rose:        #2a1228;
+  --bg-sky:         #0a1e38;
+  --bg-mint:        #081e16;
+  --bg-amber:       #1e1400;
+
+  /* Bento border colors */
+  --border-indigo:  #5566dd;
+  --border-rose:    #ee44aa;
+  --border-sky:     #2299ee;
+  --border-mint:    #22dd99;
+  --border-amber:   #ffbb22;
+  --border-nav:     #3344bb;
+
+  /* Text */
+  --text-primary:   #f0e8ff;
+  --text-muted:     #8899cc;
+  --text-indigo:    #99aaff;
+  --text-rose:      #ff88cc;
+  --text-sky:       #66ccff;
+  --text-mint:      #55ffbb;
+  --text-amber:     #ffdd66;
+
+  /* Hero */
+  --hero-glow-a:    #ff88ee;
+  --hero-glow-b:    #bb99ff;
+  --hero-glow-c:    #88ddff;
+  --logo-color:     #ff99ee;
+
+  /* Stickers */
+  --sticker-border: #ffffff;
+
+  /* Timing */
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast:  150ms;
+  --duration-normal:300ms;
+  --duration-slow:  600ms;
+}

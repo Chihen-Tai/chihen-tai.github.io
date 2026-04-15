@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allen — Portfolio</title>
+
+  <!-- Design tokens must load first so all downstream sheets can inherit vars -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/stickers.css" />
+
+  <!-- Three.js r128 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <!-- GSAP 3.12.2 + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <!-- Typed.js 2.0.12 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ─── Loading screen ─────────────────────────────────────────────────── -->
+  <div id="loading-screen">
+    <div id="loading-text"></div>
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────────────────── -->
+  <nav id="main-nav" aria-label="Main navigation">
+    <a class="nav-logo" href="#hero">✦ ALLEN</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── Left sticker nav ──────────────────────────────────────────────── -->
+  <aside id="sticker-nav-left" aria-label="Section shortcuts">
+    <div class="sticker-wrap">
+      <button class="sticker" id="sticker-wiz"
+        onclick="scrollTo('about')"
+        aria-label="Go to About section">🧙‍♀️</button>
+    </div>
+    <div class="sticker-wrap">
+      <button class="sticker" id="sticker-bot"
+        onclick="scrollTo('projects')"
+        aria-label="Go to Projects section">🤖</button>
+    </div>
+    <div class="sticker-wrap">
+      <button class="sticker" id="sticker-chem"
+        onclick="scrollTo('skills')"
+        aria-label="Go to Skills section">⚗️</button>
+    </div>
+    <div class="sticker-wrap">
+      <button class="sticker" id="sticker-sword"
+        onclick="scrollTo('elden')"
+        aria-label="Go to Achievements section">⚔️</button>
+    </div>
+    <div class="sticker-wrap">
+      <button class="sticker" id="sticker-mail"
+        onclick="scrollTo('contact')"
+        aria-label="Go to Contact section">✉️</button>
+    </div>
+  </aside>
+
+  <!-- ─── Right decorative stickers ────────────────────────────────────── -->
+  <aside id="sticker-deco-right" aria-hidden="true">
+    <div class="deco-sticker" id="deco-moon">🌙</div>
+    <div class="deco-sticker" id="deco-wave">🌊</div>
+    <div class="deco-sticker" id="deco-spark">✨</div>
+    <div class="deco-sticker" id="deco-leaf">🍀</div>
+    <div class="deco-sticker" id="deco-sakura">🌸</div>
+  </aside>
+
+  <!-- ─── Main content ──────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- Hero ──────────────────────────────────────────────────────────── -->
+    <section id="hero" aria-labelledby="hero-name">
+      <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero-rings" aria-hidden="true">
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-mid"></div>
+        <div class="ring ring-inner"></div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-name" id="hero-name">Allen</h1>
+        <p class="hero-sub"></p>
+        <div class="hero-badges" role="list" aria-label="Roles and interests">
+          <span class="badge" role="listitem">Developer</span>
+          <span class="badge" role="listitem">Chemist</span>
+          <span class="badge" role="listitem">Gamer</span>
+          <span class="badge" role="listitem">Open Source</span>
+          <span class="badge" role="listitem">Student</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- About ─────────────────────────────────────────────────────────── -->
+    <section id="about" class="content-section" aria-labelledby="about-label">
+      <p class="section-label" id="about-label">// ABOUT</p>
+      <div class="bento-grid grid-3">
+        <div class="bento-block indigo span-2">
+          <h2>Who am I?</h2>
+          <p>
+            A developer and chemist passionate about building elegant tools,
+            exploring open-source ecosystems, and diving deep into game lore.
+          </p>
+        </div>
+        <div class="bento-block rose">
+          <h2>Currently</h2>
+          <p>Studying, building, and leveling up one commit at a time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects ──────────────────────────────────────────────────────── -->
+    <section id="projects" class="content-section" aria-labelledby="projects-label">
+      <p class="section-label" id="projects-label">// PROJECTS</p>
+      <div class="bento-grid grid-2" id="projects-grid">
+        <!-- Populated dynamically by js/github.js -->
+      </div>
+    </section>
+
+    <!-- Skills ────────────────────────────────────────────────────────── -->
+    <section id="skills" class="content-section" aria-labelledby="skills-label">
+      <p class="section-label" id="skills-label">// SKILLS &amp; INTERESTS</p>
+      <div class="bento-grid grid-3-eq">
+        <div class="bento-block mint">
+          <h2>Languages</h2>
+          <ul>
+            <li>Python</li>
+            <li>JavaScript / TypeScript</li>
+            <li>Java</li>
+            <li>Dart / Flutter</li>
+          </ul>
+        </div>
+        <div class="bento-block indigo">
+          <h2>Tools &amp; Frameworks</h2>
+          <ul>
+            <li>React / Next.js</li>
+            <li>Node.js</li>
+            <li>Git &amp; GitHub Actions</li>
+            <li>Docker</li>
+          </ul>
+        </div>
+        <div class="bento-block amber">
+          <h2 id="github-stats">GitHub Stats</h2>
+          <p>Loading…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements ──────────────────────────────────────────────────── -->
+    <section id="elden" class="content-section" aria-labelledby="elden-label">
+      <p class="section-label" id="elden-label">// ACHIEVEMENTS</p>
+      <div class="bento-grid grid-2">
+        <div class="bento-block rose">
+          <h2>👑 ELDEN LORD</h2>
+          <p>Defeated every boss in Elden Ring. The fingers guide no more.</p>
+        </div>
+        <div class="bento-block indigo">
+          <h2>🦈 Pull Shark</h2>
+          <p>Merged pull requests that others have used. Contributions that matter.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Footer / Contact ──────────────────────────────────────────────── -->
+  <footer id="contact" aria-label="Contact">
+    <div class="meteor-shower" aria-hidden="true">
+      <span class="meteor m1"></span>
+      <span class="meteor m2"></span>
+      <span class="meteor m3"></span>
+      <span class="meteor m4"></span>
+    </div>
+
+    <div class="footer-content">
+      <p class="footer-title">✦ Let's connect</p>
+      <ul class="footer-links" role="list">
+        <li>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+             aria-label="GitHub profile">GitHub</a>
+        </li>
+        <li>
+          <span class="discord-text">Discord: allen#0000</span>
+        </li>
+      </ul>
+      <p class="footer-sub">Built with ✦ and too much caffeine.</p>
+    </div>
+  </footer>
+
+  <!-- ─── Application scripts ───────────────────────────────────────────── -->
+  <script src="js/boot.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/github.js"></script>
+  <script src="js/scroll.js"></script>
+
+  <script>
+    /**
+     * scrollTo — smooth-scroll to a named section by id.
+     * Called from onclick attributes on sticker nav buttons.
+     * @param {string} id - The target section's id attribute value
+     */
+    function scrollTo(id) {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  </script>
+
+</body>
+</html>
