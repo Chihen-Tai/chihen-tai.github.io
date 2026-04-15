@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Layout v2 — Brighter</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #07050f; color: #f0e8ff; font-family: 'Courier New', monospace; padding: 20px; }
+  h2 { color: #ff88ff; font-size: 1.3rem; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; }
+  .subtitle { color: #aa88cc; font-size: 0.85rem; margin-bottom: 24px; }
+
+  .page-preview { display: flex; gap: 24px; align-items: flex-start; }
+  .desktop-frame {
+    flex: 1; border: 2px solid #7733bb; border-radius: 8px;
+    overflow: hidden; background: #07050f;
+    box-shadow: 0 0 30px rgba(180,80,255,0.25);
+  }
+
+  .s-nav {
+    background: rgba(15,5,30,0.98); border-bottom: 1px solid #8844cc;
+    padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.65rem;
+  }
+  .s-nav .logo { font-weight: 900; letter-spacing: 3px; color: #ff88ff; text-shadow: 0 0 10px rgba(255,100,255,0.8); }
+  .s-nav .links { display: flex; gap: 12px; color: #cc99ff; }
+
+  .s-hero {
+    background: radial-gradient(ellipse at 50% 50%, #3d0a66 0%, #1a0533 40%, #07050f 80%);
+    padding: 36px 20px; text-align: center; position: relative;
+    border-bottom: 1px solid #9944ee;
+    min-height: 160px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .s-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(180,50,255,0.15) 0%, transparent 70%);
+  }
+  .star { position: absolute; border-radius: 50%; background: white; }
+  .ring {
+    position: absolute; border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .hero-name {
+    font-size: 1.8rem; font-weight: 900; position: relative; z-index: 1;
+    background: linear-gradient(135deg, #ff66ff, #cc88ff, #88ccff, #ff88ff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 4px;
+    filter: drop-shadow(0 0 18px rgba(220,100,255,0.9)) drop-shadow(0 0 40px rgba(180,50,255,0.5));
+  }
+  .hero-sub { font-size: 0.65rem; color: #dd99ff; letter-spacing: 3px; margin-top: 8px; position: relative; z-index: 1; text-shadow: 0 0 8px rgba(200,100,255,0.6); }
+  .hero-badges { display: flex; gap: 6px; margin-top: 12px; position: relative; z-index: 1; justify-content: center; flex-wrap: wrap; }
+  .badge {
+    background: rgba(140,0,220,0.5); border: 1px solid #cc55ff;
+    border-radius: 20px; padding: 3px 10px; font-size: 0.6rem; color: #ffaaff;
+    box-shadow: 0 0 8px rgba(200,80,255,0.5);
+  }
+
+  .s-bento { padding: 10px 12px; display: grid; gap: 8px; }
+  .grid-3 { grid-template-columns: 1.5fr 1fr 1fr; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3-eq { grid-template-columns: 1fr 1fr 1fr; }
+
+  .bento-block { border-radius: 8px; padding: 12px 14px; min-height: 60px; }
+  .b-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .b-title { font-size: 0.85rem; font-weight: bold; }
+  .b-sub { font-size: 0.62rem; margin-top: 4px; opacity: 0.8; }
+  .span-2 { grid-column: span 2; }
+
+  .purple {
+    background: linear-gradient(135deg, #1e0a3a, #2a1050);
+    border: 1px solid #9944ee;
+    box-shadow: 0 0 14px rgba(150,50,230,0.3), inset 0 1px 0 rgba(200,100,255,0.15);
+  }
+  .purple .b-label { color: #cc77ff; }
+  .purple .b-title { color: #f0ddff; }
+  .purple .b-sub { color: #bb88ee; }
+
+  .cyan {
+    background: linear-gradient(135deg, #001828, #002a3a);
+    border: 1px solid #0099dd;
+    box-shadow: 0 0 14px rgba(0,180,255,0.25), inset 0 1px 0 rgba(0,200,255,0.1);
+  }
+  .cyan .b-label { color: #44ccff; }
+  .cyan .b-title { color: #ccf0ff; }
+  .cyan .b-sub { color: #55aacc; }
+
+  .pink {
+    background: linear-gradient(135deg, #280010, #380020);
+    border: 1px solid #ff2288;
+    box-shadow: 0 0 14px rgba(255,30,130,0.3), inset 0 1px 0 rgba(255,80,160,0.1);
+  }
+  .pink .b-label { color: #ff66bb; }
+  .pink .b-title { color: #ffd0e8; }
+  .pink .b-sub { color: #cc5599; }
+
+  .green {
+    background: linear-gradient(135deg, #001a10, #002a18);
+    border: 1px solid #00ee88;
+    box-shadow: 0 0 14px rgba(0,220,120,0.25), inset 0 1px 0 rgba(0,255,150,0.1);
+  }
+  .green .b-label { color: #44ffaa; }
+  .green .b-title { color: #ccffee; }
+  .green .b-sub { color: #55cc88; }
+
+  .gold {
+    background: linear-gradient(135deg, #1a1000, #2a1a00);
+    border: 1px solid #ffaa00;
+    box-shadow: 0 0 14px rgba(255,160,0,0.3), inset 0 1px 0 rgba(255,200,0,0.1);
+  }
+  .gold .b-label { color: #ffcc44; }
+  .gold .b-title { color: #fff0cc; }
+  .gold .b-sub { color: #cc9933; }
+
+  .section-label {
+    padding: 8px 12px 0;
+    font-size: 0.55rem; color: #bb77ff; letter-spacing: 4px; text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(180,80,255,0.6);
+  }
+  .s-footer {
+    background: #050310; border-top: 1px solid #6633bb;
+    padding: 10px 12px; text-align: center;
+    font-size: 0.6rem; color: #bb88ff;
+    text-shadow: 0 0 8px rgba(180,100,255,0.5);
+  }
+
+  .legend { width: 210px; flex-shrink: 0; }
+  .legend h3 { color: #ff88ff; font-size: 0.8rem; margin-bottom: 14px; letter-spacing: 1px; text-shadow: 0 0 8px rgba(255,100,255,0.5); }
+  .legend-item { display: flex; gap: 8px; margin-bottom: 11px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; margin-top: 2px; }
+  .legend-item p { font-size: 0.7rem; color: #aa88cc; line-height: 1.5; }
+  .legend-item strong { color: #eeddff; display: block; font-size: 0.75rem; }
+
+  .feature-box {
+    margin-top: 14px; padding: 12px;
+    background: linear-gradient(135deg, #12062a, #1a0840);
+    border: 1px solid #8844cc;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(150,50,220,0.25);
+    font-size: 0.7rem; color: #cc99ff; line-height: 1.9;
+  }
+  .feature-box strong { color: #ff88ff; display: block; margin-bottom: 4px; font-size: 0.75rem; }
+
+  .confirm-bar {
+    margin-top: 20px; padding: 13px 16px; cursor: pointer;
+    background: linear-gradient(135deg, #1a0838, #2a1055);
+    border: 1px solid #9944ee;
+    border-radius: 8px; color: #ff88ff; font-size: 0.85rem; text-align: center;
+    box-shadow: 0 0 18px rgba(180,50,255,0.35);
+    transition: all 0.2s;
+  }
+  .confirm-bar:hover { box-shadow: 0 0 28px rgba(220,80,255,0.55); border-color: #cc66ff; }
+</style>
+</head>
+<body>
+
+<h2>頁面結構 v2 — 更亮眼</h2>
+<p class="subtitle">同樣深色底，發光更強、多色 Bento、每個 block 都有自己的霓虹色調</p>
+
+<div class="page-preview">
+  <div class="desktop-frame">
+    <div class="s-nav">
+      <div class="logo">✦ ALLEN</div>
+      <div class="links"><span>About</span><span>Projects</span><span>Skills</span><span>Contact</span></div>
+    </div>
+
+    <div class="s-hero">
+      <div class="star" style="width:3px;height:3px;top:10%;left:8%;box-shadow:0 0 5px #fff,0 0 10px #ccaaff"></div>
+      <div class="star" style="width:2px;height:2px;top:25%;left:90%;box-shadow:0 0 4px #ffaaff"></div>
+      <div class="star" style="width:4px;height:4px;top:75%;left:12%;box-shadow:0 0 8px #ff88ff,0 0 16px #cc44ff"></div>
+      <div class="star" style="width:2px;height:2px;top:18%;left:55%;box-shadow:0 0 4px #88aaff"></div>
+      <div class="star" style="width:3px;height:3px;top:80%;left:78%;box-shadow:0 0 6px #ffaaff"></div>
+      <div class="ring" style="width:220px;height:220px;border:1px solid rgba(200,100,255,0.4);box-shadow:0 0 24px rgba(180,50,255,0.2)"></div>
+      <div class="ring" style="width:150px;height:150px;border:1px solid rgba(200,80,255,0.55);box-shadow:0 0 16px rgba(160,40,255,0.25)"></div>
+      <div class="ring" style="width:90px;height:90px;border:1px solid rgba(230,130,255,0.7);box-shadow:0 0 12px rgba(210,80,255,0.35)"></div>
+      <div class="hero-name">ALLEN CHIHEN-TAI</div>
+      <div class="hero-sub">✦ QUANTUM · CHEMISTRY · CODE · ELDEN LORD ✦</div>
+      <div class="hero-badges">
+        <span class="badge">⚗️ Chemist</span>
+        <span class="badge">⚡ Dev</span>
+        <span class="badge">👑 Elden Lord</span>
+        <span class="badge">🌌 Quantum</span>
+        <span class="badge">🦈 Pull Shark</span>
+      </div>
+    </div>
+
+    <div class="section-label">// ABOUT</div>
+    <div class="s-bento grid-3">
+      <div class="bento-block purple span-2">
+        <div class="b-label">Who am I</div>
+        <div class="b-title">Allen Chihen-Tai</div>
+        <div class="b-sub">Computer + Quantum Mechanics · Currently learning Chemistry · Discord: Microdaery</div>
+      </div>
+      <div class="bento-block pink">
+        <div class="b-label">Status</div>
+        <div class="b-title">👑 Elden Lord</div>
+        <div class="b-sub">🦈 Pull Shark · GitHub Pro</div>
+      </div>
+    </div>
+
+    <div class="section-label">// PROJECTS</div>
+    <div class="s-bento grid-2">
+      <div class="bento-block cyan">
+        <div class="b-label">Python · ⭐ 2</div>
+        <div class="b-title">Polymarket BTC Bot</div>
+        <div class="b-sub">Crypto prediction market trading bot</div>
+      </div>
+      <div class="bento-block purple">
+        <div class="b-label">HTML · ⭐ 2</div>
+        <div class="b-title">chem.github.io</div>
+        <div class="b-sub">Chemistry static website</div>
+      </div>
+    </div>
+
+    <div class="section-label">// SKILLS & INTERESTS</div>
+    <div class="s-bento grid-3-eq">
+      <div class="bento-block green">
+        <div class="b-label">Code</div>
+        <div class="b-title">Python · HTML · Java</div>
+      </div>
+      <div class="bento-block purple">
+        <div class="b-label">Science</div>
+        <div class="b-title">Quantum · Chemistry</div>
+      </div>
+      <div class="bento-block gold">
+        <div class="b-label">GitHub</div>
+        <div class="b-title">16 Repos · Pro 🌟</div>
+      </div>
+    </div>
+
+    <div class="s-footer">✦ &nbsp; chihen-tai.github.io &nbsp;·&nbsp; github.com/Chihen-Tai &nbsp;·&nbsp; Discord: Microdaery &nbsp; ✦</div>
+  </div>
+
+  <div class="legend">
+    <h3>這版改了什麼</h3>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#ff88ff;box-shadow:0 0 6px #ff88ff"></div>
+      <div><strong>更強的發光</strong><p>每個 block 外發光加強，星星有彩色光暈</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:linear-gradient(#cc44ff,#0099dd)"></div>
+      <div><strong>多色 Bento</strong><p>每格有自己的霓虹色調：紫/青/粉/綠/金</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#3d0a66"></div>
+      <div><strong>Hero 更飽和</strong><p>三層魔法陣都有 glow，Hero 中心亮度拉高</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#ffaa00;box-shadow:0 0 5px #ffaa00"></div>
+      <div><strong>金色成就格</strong><p>GitHub stats 用金色突顯，Elden Lord 感更強</p></div>
+    </div>
+
+    <div class="feature-box">
+      <strong>✦ 炫炮功能（不變）</strong>
+      Three.js 互動星空<br>
+      魔法陣旋轉動畫<br>
+      GitHub API 即時資料<br>
+      GSAP ScrollTrigger<br>
+      Typed.js 打字效果<br>
+      Bento hover 光爆效果<br>
+      流星雨背景
+    </div>
+  </div>
+</div>
+
+<div class="confirm-bar" data-choice="ok" onclick="toggleSelect(this)">
+  ✦ 這個亮度 OK？點這裡確認，或告訴我繼續調整
+</div>
+
+<script>
+function toggleSelect(el) {
+  el.style.boxShadow = '0 0 30px rgba(220,80,255,0.7)';
+  el.textContent = '✦ 確認！開始寫設計文件和實作計畫';
+  if (window.recordChoice) window.recordChoice('ok', 'layout-v2-confirmed');
+}
+</script>
+
+</body>
+</html>

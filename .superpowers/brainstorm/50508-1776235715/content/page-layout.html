@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Layout Mockup</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #e0e0ff; font-family: 'Courier New', monospace; padding: 20px; }
+  h2 { color: #cc88ff; font-size: 1.3rem; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; }
+  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 24px; }
+
+  .page-preview { display: flex; gap: 24px; align-items: flex-start; }
+
+  .desktop-frame {
+    flex: 1; border: 2px solid #3a2a5a; border-radius: 8px;
+    overflow: hidden; background: #050010;
+  }
+
+  .s-nav {
+    background: rgba(10,0,20,0.95); border-bottom: 1px solid #2a1a4e;
+    padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.65rem; color: #cc88ff;
+  }
+  .s-nav .logo { font-weight: 900; letter-spacing: 2px; }
+  .s-nav .links { display: flex; gap: 12px; color: #8866aa; }
+
+  .s-hero {
+    background: radial-gradient(ellipse at 50% 40%, #2a0844 0%, #0a0018 60%);
+    padding: 32px 20px; text-align: center; position: relative;
+    border-bottom: 1px solid #2a1a4e; min-height: 140px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .s-hero .star { position: absolute; border-radius: 50%; background: white; }
+  .s-hero .ring {
+    position: absolute; border-radius: 50%; border: 1px solid rgba(180,100,255,0.2);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .hero-name {
+    font-size: 1.6rem; font-weight: 900; position: relative; z-index: 1;
+    background: linear-gradient(135deg, #ff88ff, #88aaff, #ffaaff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 3px; filter: drop-shadow(0 0 12px rgba(200,100,255,0.6));
+  }
+  .hero-sub { font-size: 0.6rem; color: #9966cc; letter-spacing: 2px; margin-top: 6px; position: relative; z-index: 1; }
+  .hero-badges { display: flex; gap: 6px; margin-top: 10px; position: relative; z-index: 1; justify-content: center; flex-wrap: wrap; }
+  .badge { background: rgba(100,0,160,0.4); border: 1px solid #7733bb; border-radius: 20px; padding: 2px 8px; font-size: 0.55rem; color: #cc88ff; }
+
+  .s-bento { padding: 12px; display: grid; gap: 6px; }
+  .s-bento.grid-3 { grid-template-columns: 1.5fr 1fr 1fr; }
+  .s-bento.grid-2 { grid-template-columns: 1fr 1fr; }
+
+  .bento-block {
+    background: #0f0f22; border: 1px solid #2a2a4a;
+    border-radius: 6px; padding: 10px 12px; min-height: 55px;
+  }
+  .b-label { font-size: 0.55rem; color: #6644aa; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .b-title { font-size: 0.8rem; color: #e0d0ff; font-weight: bold; }
+  .b-sub { font-size: 0.6rem; color: #6655aa; margin-top: 3px; }
+  .accent-purple { border-color: #7733bb55; background: #140a22; }
+  .accent-cyan { border-color: #00ccff44; background: #001a22; }
+  .accent-pink { border-color: #ff44aa44; background: #1a0011; }
+  .accent-green { border-color: #00ff8844; background: #001a0a; }
+  .span-2 { grid-column: span 2; }
+
+  .section-label { padding: 8px 12px 0; font-size: 0.55rem; color: #6644aa; letter-spacing: 3px; text-transform: uppercase; }
+  .s-footer { background: #050010; border-top: 1px solid #1a1030; padding: 8px 12px; text-align: center; font-size: 0.55rem; color: #443366; }
+
+  .legend { width: 220px; flex-shrink: 0; }
+  .legend h3 { color: #cc88ff; font-size: 0.8rem; margin-bottom: 12px; letter-spacing: 1px; }
+  .legend-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 12px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; margin-top: 2px; }
+  .legend-item p { font-size: 0.72rem; color: #888; line-height: 1.5; }
+  .legend-item strong { color: #ccc; display: block; font-size: 0.75rem; }
+
+  .confirm-bar {
+    margin-top: 20px; padding: 12px 16px; cursor: pointer;
+    background: #0d0a1a; border: 1px solid #7733bb44;
+    border-radius: 6px; color: #cc88ff; font-size: 0.8rem; text-align: center;
+    transition: all 0.2s;
+  }
+  .confirm-bar:hover { border-color: #cc88ff; background: #1a0a2a; }
+</style>
+</head>
+<body>
+
+<h2>整體頁面結構</h2>
+<p class="subtitle">B 魔法宇宙 Hero + D Bento Grid — 完整捲動頁面結構預覽</p>
+
+<div class="page-preview">
+
+  <div class="desktop-frame">
+    <div class="s-nav">
+      <div class="logo">✦ ALLEN</div>
+      <div class="links"><span>About</span><span>Projects</span><span>Skills</span><span>Contact</span></div>
+    </div>
+
+    <div class="s-hero">
+      <div class="star" style="width:2px;height:2px;top:12%;left:8%"></div>
+      <div class="star" style="width:1px;height:1px;top:30%;left:88%"></div>
+      <div class="star" style="width:3px;height:3px;top:70%;left:15%"></div>
+      <div class="star" style="width:2px;height:2px;top:20%;left:60%"></div>
+      <div class="ring" style="width:200px;height:200px;"></div>
+      <div class="ring" style="width:130px;height:130px;"></div>
+      <div class="hero-name">ALLEN CHIHEN-TAI</div>
+      <div class="hero-sub">✦ QUANTUM · CHEMISTRY · CODE · ELDEN LORD ✦</div>
+      <div class="hero-badges">
+        <span class="badge">⚗️ Chemist</span>
+        <span class="badge">⚡ Dev</span>
+        <span class="badge">👑 Elden Lord</span>
+        <span class="badge">🌌 Quantum</span>
+      </div>
+    </div>
+
+    <div class="section-label">// ABOUT</div>
+    <div class="s-bento grid-3">
+      <div class="bento-block accent-purple span-2">
+        <div class="b-label">Who am I</div>
+        <div class="b-title">Allen Chihen-Tai</div>
+        <div class="b-sub">Computer + Quantum Mechanics · Chemistry · Discord: Microdaery</div>
+      </div>
+      <div class="bento-block accent-pink">
+        <div class="b-label">Achievement</div>
+        <div class="b-title">👑 Elden Lord</div>
+        <div class="b-sub">Pull Shark · GitHub Pro</div>
+      </div>
+    </div>
+
+    <div class="section-label">// PROJECTS</div>
+    <div class="s-bento grid-2">
+      <div class="bento-block accent-cyan">
+        <div class="b-label">Python · ⭐ 2</div>
+        <div class="b-title">Polymarket BTC Bot</div>
+        <div class="b-sub">Crypto trading bot (risk!!)</div>
+      </div>
+      <div class="bento-block accent-purple">
+        <div class="b-label">HTML · ⭐ 2</div>
+        <div class="b-title">chem.github.io</div>
+        <div class="b-sub">Chemistry static site</div>
+      </div>
+    </div>
+
+    <div class="section-label">// SKILLS</div>
+    <div class="s-bento grid-3">
+      <div class="bento-block accent-green">
+        <div class="b-label">Languages</div>
+        <div class="b-title">Python · HTML · Java</div>
+      </div>
+      <div class="bento-block accent-purple">
+        <div class="b-label">Interests</div>
+        <div class="b-title">Quantum · Chemistry</div>
+      </div>
+      <div class="bento-block accent-pink">
+        <div class="b-label">GitHub</div>
+        <div class="b-title">16 Repos · Pro · Pull Shark</div>
+      </div>
+    </div>
+
+    <div class="s-footer">✦ Chihen-Tai · Built with magic &amp; code · github.com/Chihen-Tai ✦</div>
+  </div>
+
+  <div class="legend">
+    <h3>各區說明</h3>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#440088"></div>
+      <div><strong>① EVA 開機動畫</strong><p>載入時 "ALLEN SYSTEM BOOT..." 文字動畫，進場後淡出</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#7733bb"></div>
+      <div><strong>② Hero (B 風格)</strong><p>Three.js 互動星空 + 魔法陣旋轉 + 漸層發光名字</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#140a22"></div>
+      <div><strong>③ About Bento</strong><p>自我介紹格子，hover 有光暈，GSAP 捲動進場</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#001a22"></div>
+      <div><strong>④ Projects Bento</strong><p>GitHub API 即時抓 repo，點卡片展開詳細資訊</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#001a0a"></div>
+      <div><strong>⑤ Skills</strong><p>技術標籤 + 興趣六角形格子</p></div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#1a0011"></div>
+      <div><strong>⑥ Footer</strong><p>流星雨動畫 + GitHub / Discord 連結</p></div>
+    </div>
+
+    <div style="margin-top:16px;padding:10px;background:#0d0a1a;border:1px solid #33225566;border-radius:6px;font-size:0.7rem;color:#9977cc;line-height:1.8;">
+      <strong style="color:#cc88ff;display:block;margin-bottom:4px;">炫炮功能：</strong>
+      ✦ Three.js 星空 + 滑鼠互動<br>
+      ✦ 魔法陣 SVG 旋轉<br>
+      ✦ GitHub API 即時資料<br>
+      ✦ GSAP ScrollTrigger<br>
+      ✦ Typed.js 打字效果<br>
+      ✦ Bento hover 光暈<br>
+      ✦ 流星雨特效
+    </div>
+  </div>
+
+</div>
+
+<div class="confirm-bar" data-choice="ok" onclick="toggleSelect(this)">
+  ✦ 這個結構看起來 OK？點這裡確認，或告訴我要調整什麼
+</div>
+
+<script>
+function toggleSelect(el) {
+  el.style.borderColor = '#cc88ff';
+  el.style.background = '#1a0a2a';
+  el.textContent = '✦ 確認！開始寫 Design Doc';
+  if (window.recordChoice) window.recordChoice('ok', 'layout-confirmed');
+}
+</script>
+
+</body>
+</html>

@@ -3,23 +3,16 @@
   var el     = document.getElementById('loading-text');
 
   new Typed(el, {
-    strings: [
-      'ALLEN SYSTEM INITIALIZING...',
-      'LOADING QUANTUM MODULES...',
-      'SUMMONING ELDEN LORD...',
-      'READY.'
-    ],
-    typeSpeed: 40,
-    backSpeed: 20,
-    backDelay: 400,
-    startDelay: 200,
+    strings: ['ALLEN.SYS — ONLINE ✦'],
+    typeSpeed: 55,
+    startDelay: 100,
     loop: false,
     showCursor: false,
     onComplete: function () {
       setTimeout(function () {
         screen.classList.add('fade-out');
-        setTimeout(function () { screen.style.display = 'none'; }, 700);
-      }, 600);
+        setTimeout(function () { screen.style.display = 'none'; }, 500);
+      }, 300);
     }
   });
 

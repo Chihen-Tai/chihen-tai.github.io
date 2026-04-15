@@ -194,22 +194,85 @@
       <p class="footer-title">✦ Let's connect</p>
       <ul class="footer-links" role="list">
         <li>
-          <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+          <a href="https://github.com/Chihen-Tai" target="_blank" rel="noopener noreferrer"
              aria-label="GitHub profile">GitHub</a>
         </li>
         <li>
-          <span class="discord-text">Discord: allen#0000</span>
+          <a href="mailto:microdaery@gmail.com" aria-label="Send email">microdaery@gmail.com</a>
+        </li>
+        <li>
+          <span class="discord-text">Discord: Microdaery#1103</span>
         </li>
       </ul>
+      <button class="spell-btn" onclick="spawnSpell(this)" aria-label="Cast a spell">
+        ✦ DO NOT PRESS ✦
+      </button>
       <p class="footer-sub">Built with ✦ and too much caffeine.</p>
     </div>
   </footer>
 
   <!-- ─── Application scripts ───────────────────────────────────────────── -->
-  <script src="js/boot.js"></script>
-  <script src="js/stars.js"></script>
-  <script src="js/github.js"></script>
-  <script src="js/scroll.js"></script>
+  <script src="js/boot.js" defer></script>
+  <script src="js/stars.js" defer></script>
+  <script src="js/github.js" defer></script>
+  <script src="js/scroll.js" defer></script>
+
+  <style>
+    .spell-btn {
+      margin-top: 18px;
+      background: linear-gradient(135deg, #1a0840, #2a1060);
+      border: 1px solid #9944ee;
+      border-radius: 24px;
+      color: #cc88ff;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: box-shadow 200ms, transform 150ms;
+      box-shadow: 0 0 14px rgba(180, 50, 255, 0.3);
+    }
+    .spell-btn:hover {
+      box-shadow: 0 0 28px rgba(220, 80, 255, 0.6);
+      transform: scale(1.05);
+    }
+    .spell-particle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.4rem;
+      z-index: 9999;
+      animation: spell-fly 1.2s ease-out forwards;
+    }
+    @keyframes spell-fly {
+      0%   { opacity: 1; transform: translate(0,0) scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3) rotate(360deg); }
+    }
+    .spell-msg {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.6);
+      background: linear-gradient(135deg, #1a0840, #2a1060);
+      border: 2px solid #cc66ff;
+      border-radius: 16px;
+      padding: 28px 48px;
+      color: #ff88ff;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(200, 50, 255, 0.6);
+      z-index: 9998;
+      animation: spell-pop 1.8s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes spell-pop {
+      0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+      20%  { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+      80%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    }
+  </style>
 
   <script>
     /**
@@ -222,6 +285,31 @@
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    }
+
+    function spawnSpell(btn) {
+      var emojis = ['✨','🌸','⚗️','🌙','💜','⚡','🔮','👑','🌌','🦄'];
+      var rect = btn.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      for (var i = 0; i < 18; i++) {
+        var p = document.createElement('span');
+        p.className = 'spell-particle';
+        p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        var angle = (i / 18) * 2 * Math.PI;
+        var dist = 80 + Math.random() * 140;
+        p.style.left = cx + 'px';
+        p.style.top  = cy + 'px';
+        p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        document.body.appendChild(p);
+        p.addEventListener('animationend', function () { this.remove(); });
+      }
+      var msg = document.createElement('div');
+      msg.className = 'spell-msg';
+      msg.innerHTML = '✦ SPELL CAST ✦<br><span style="font-size:0.7rem;color:#bb99ff;letter-spacing:2px">thou art maidenless</span>';
+      document.body.appendChild(msg);
+      msg.addEventListener('animationend', function () { this.remove(); });
     }
   </script>
 

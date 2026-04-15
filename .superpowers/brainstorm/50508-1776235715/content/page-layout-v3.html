@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Layout v3 — Cheerful + Stickers</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1130;
+    color: #f0e8ff;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+  }
+  h2 { color: #ff99ee; font-size: 1.3rem; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; }
+  .subtitle { color: #9999cc; font-size: 0.85rem; margin-bottom: 24px; }
+
+  .page-preview { display: flex; gap: 20px; align-items: flex-start; }
+
+  /* ── STICKER SIDEBAR ── */
+  .sticker-col {
+    width: 90px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding-top: 44px;
+  }
+  .sticker-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .sticker {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+    position: relative; overflow: hidden;
+  }
+  .sticker:hover { transform: scale(1.12) rotate(-4deg); box-shadow: 0 8px 24px rgba(0,0,0,0.55), 0 0 20px rgba(200,150,255,0.45); }
+  .sticker-label { font-size: 0.55rem; color: #8888bb; text-align: center; }
+
+  .sticker-wiz  { background: linear-gradient(160deg,#2a1060,#4a1a88); border-color:#cc88ff; }
+  .sticker-bot  { background: linear-gradient(160deg,#0a2040,#1a3a60); border-color:#44bbff; }
+  .sticker-chem { background: linear-gradient(160deg,#102820,#1a4030); border-color:#44ffaa; }
+  .sticker-sword{ background: linear-gradient(160deg,#3a1010,#5a2020); border-color:#ff7755; }
+  .sticker-mail { background: linear-gradient(160deg,#101a40,#1a2a60); border-color:#ffcc44; }
+
+  /* ── DESKTOP FRAME ── */
+  .desktop-frame {
+    flex: 1; border: 2px solid #4455cc; border-radius: 10px;
+    overflow: hidden; background: #0d1130;
+    box-shadow: 0 0 40px rgba(100,120,255,0.2);
+  }
+
+  .s-nav {
+    background: rgba(13,15,42,0.98); border-bottom: 1px solid #3344bb;
+    padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.65rem;
+  }
+  .s-nav .logo { font-weight: 900; letter-spacing: 3px; color: #ff99ee; text-shadow: 0 0 10px rgba(255,150,240,0.7); }
+  .s-nav .links { display: flex; gap: 12px; color: #aabbff; }
+
+  .s-hero {
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(80,40,180,0.55) 0%, transparent 55%),
+      radial-gradient(ellipse at 72% 38%, rgba(180,60,160,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 95%, rgba(40,60,200,0.3) 0%, transparent 60%),
+      linear-gradient(180deg, #141840 0%, #0d1130 100%);
+    padding: 34px 20px; text-align: center; position: relative;
+    border-bottom: 1px solid #4455cc; min-height: 158px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .star { position: absolute; border-radius: 50%; background: white; }
+  .ring { position: absolute; border-radius: 50%; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .hero-name {
+    font-size: 1.7rem; font-weight: 900; position: relative; z-index: 1;
+    background: linear-gradient(135deg, #ff88ee, #bb99ff, #88ddff, #ffaaee);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px;
+    filter: drop-shadow(0 0 16px rgba(200,140,255,0.85)) drop-shadow(0 0 32px rgba(150,100,255,0.4));
+  }
+  .hero-sub { font-size: 0.62rem; color: #ccaaff; letter-spacing: 2px; margin-top: 7px; position: relative; z-index: 1; }
+  .hero-badges { display: flex; gap: 6px; margin-top: 11px; position: relative; z-index: 1; justify-content: center; flex-wrap: wrap; }
+  .badge {
+    background: rgba(70,55,175,0.55); border: 1px solid #8899ff;
+    border-radius: 20px; padding: 3px 10px; font-size: 0.6rem; color: #ddeeff;
+    box-shadow: 0 0 8px rgba(100,120,255,0.35);
+  }
+
+  .s-bento { padding: 10px 12px; display: grid; gap: 7px; }
+  .grid-3   { grid-template-columns: 1.5fr 1fr 1fr; }
+  .grid-2   { grid-template-columns: 1fr 1fr; }
+  .grid-3eq { grid-template-columns: 1fr 1fr 1fr; }
+  .span-2   { grid-column: span 2; }
+
+  .bento-block { border-radius: 8px; padding: 11px 13px; min-height: 58px; }
+  .b-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+  .b-title { font-size: 0.83rem; font-weight: bold; }
+  .b-sub   { font-size: 0.61rem; margin-top: 4px; opacity: 0.8; }
+
+  .indigo { background:linear-gradient(135deg,#181e50,#232a68); border:1px solid #5566dd; box-shadow:0 0 12px rgba(80,100,220,0.22),inset 0 1px 0 rgba(140,160,255,0.1); }
+  .indigo .b-label{color:#99aaff;} .indigo .b-title{color:#eeeeff;} .indigo .b-sub{color:#8899cc;}
+
+  .rose { background:linear-gradient(135deg,#2a1228,#3a1a38); border:1px solid #ee44aa; box-shadow:0 0 12px rgba(230,60,170,0.26),inset 0 1px 0 rgba(255,100,200,0.1); }
+  .rose .b-label{color:#ff88cc;} .rose .b-title{color:#ffe0f0;} .rose .b-sub{color:#cc6699;}
+
+  .sky { background:linear-gradient(135deg,#0a1e38,#102848); border:1px solid #2299ee; box-shadow:0 0 12px rgba(30,160,240,0.22),inset 0 1px 0 rgba(80,200,255,0.1); }
+  .sky .b-label{color:#66ccff;} .sky .b-title{color:#cceeff;} .sky .b-sub{color:#4488bb;}
+
+  .mint { background:linear-gradient(135deg,#081e16,#0e2820); border:1px solid #22dd99; box-shadow:0 0 12px rgba(30,210,150,0.2),inset 0 1px 0 rgba(80,255,180,0.1); }
+  .mint .b-label{color:#55ffbb;} .mint .b-title{color:#ccffee;} .mint .b-sub{color:#44aa77;}
+
+  .amber { background:linear-gradient(135deg,#1e1400,#2a1c00); border:1px solid #ffbb22; box-shadow:0 0 12px rgba(255,185,30,0.26),inset 0 1px 0 rgba(255,220,80,0.1); }
+  .amber .b-label{color:#ffdd66;} .amber .b-title{color:#fff4cc;} .amber .b-sub{color:#cc9922;}
+
+  .section-label { padding:8px 12px 0; font-size:0.55rem; color:#aabbff; letter-spacing:4px; text-transform:uppercase; text-shadow:0 0 6px rgba(150,170,255,0.45); }
+  .s-footer { background:#0a0e28; border-top:1px solid #2233aa; padding:10px 12px; text-align:center; font-size:0.6rem; color:#8899dd; }
+
+  /* ── RIGHT DECO COL ── */
+  .deco-col {
+    width: 88px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding-top: 16px;
+  }
+  .deco-sticker {
+    width: 74px; height: 74px; border-radius: 16px;
+    border: 3px solid white;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; cursor: pointer;
+    transition: transform 0.18s;
+  }
+  .deco-sticker:hover { transform: scale(1.1) rotate(3deg); }
+  .deco-note { font-size: 0.55rem; color: #556688; text-align: center; line-height: 1.5; margin-top: 6px; }
+
+  /* ── BOTTOM NOTES ── */
+  .notes-grid { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .note-card { background:#111536; border:1px solid #2233aa; border-radius:8px; padding:10px 12px; }
+  .note-card strong { color:#aabbff; display:block; margin-bottom:4px; font-size:0.75rem; }
+  .note-card p { color:#7788bb; font-size:0.7rem; line-height:1.5; }
+
+  .confirm-bar {
+    margin-top: 14px; padding: 13px 16px; cursor: pointer;
+    background: linear-gradient(135deg,#161c50,#222a70);
+    border: 1px solid #5566dd; border-radius: 8px;
+    color: #aabbff; font-size: 0.85rem; text-align: center;
+    box-shadow: 0 0 18px rgba(80,110,220,0.3);
+    transition: all 0.2s;
+  }
+  .confirm-bar:hover { box-shadow:0 0 28px rgba(120,150,255,0.5); border-color:#8899ff; color:#ddeeff; }
+</style>
+</head>
+<body>
+
+<h2>頁面結構 v3 — 開朗 + 動漫貼圖</h2>
+<p class="subtitle">背景換深海藍靛色，左側動漫貼圖導航按鈕，右側裝飾貼圖</p>
+
+<div class="page-preview">
+
+  <!-- LEFT NAV STICKERS -->
+  <div class="sticker-col">
+    <div class="sticker-wrap">
+      <div class="sticker sticker-wiz">🧙‍♀️</div>
+      <div class="sticker-label">About</div>
+    </div>
+    <div class="sticker-wrap">
+      <div class="sticker sticker-bot">🤖</div>
+      <div class="sticker-label">Projects</div>
+    </div>
+    <div class="sticker-wrap">
+      <div class="sticker sticker-chem">⚗️</div>
+      <div class="sticker-label">Skills</div>
+    </div>
+    <div class="sticker-wrap">
+      <div class="sticker sticker-sword">⚔️</div>
+      <div class="sticker-label">Elden</div>
+    </div>
+    <div class="sticker-wrap">
+      <div class="sticker sticker-mail">✉️</div>
+      <div class="sticker-label">Contact</div>
+    </div>
+  </div>
+
+  <!-- MAIN FRAME -->
+  <div class="desktop-frame">
+    <div class="s-nav">
+      <div class="logo">✦ ALLEN</div>
+      <div class="links"><span>About</span><span>Projects</span><span>Skills</span><span>Contact</span></div>
+    </div>
+
+    <div class="s-hero">
+      <div class="star" style="width:3px;height:3px;top:10%;left:8%;box-shadow:0 0 6px #aaddff,0 0 12px #88aaff"></div>
+      <div class="star" style="width:2px;height:2px;top:22%;left:89%;box-shadow:0 0 5px #ffaadd"></div>
+      <div class="star" style="width:4px;height:4px;top:74%;left:13%;box-shadow:0 0 8px #ccaaff,0 0 16px #aa88ff"></div>
+      <div class="star" style="width:2px;height:2px;top:16%;left:52%;box-shadow:0 0 4px #aaccff"></div>
+      <div class="star" style="width:3px;height:3px;top:80%;left:80%;box-shadow:0 0 6px #ffbbee"></div>
+      <div class="ring" style="width:210px;height:210px;border:1px solid rgba(150,170,255,0.35);box-shadow:0 0 20px rgba(100,130,255,0.14)"></div>
+      <div class="ring" style="width:145px;height:145px;border:1px solid rgba(180,130,255,0.5);box-shadow:0 0 14px rgba(160,100,255,0.2)"></div>
+      <div class="ring" style="width:85px;height:85px;border:1px solid rgba(210,170,255,0.65);box-shadow:0 0 10px rgba(185,120,255,0.28)"></div>
+      <div class="hero-name">ALLEN CHIHEN-TAI</div>
+      <div class="hero-sub">✦ QUANTUM · CHEMISTRY · CODE · ELDEN LORD ✦</div>
+      <div class="hero-badges">
+        <span class="badge">⚗️ Chemist</span>
+        <span class="badge">⚡ Dev</span>
+        <span class="badge">👑 Elden Lord</span>
+        <span class="badge">🌌 Quantum</span>
+        <span class="badge">🦈 Pull Shark</span>
+      </div>
+    </div>
+
+    <div class="section-label">// ABOUT</div>
+    <div class="s-bento grid-3">
+      <div class="bento-block indigo span-2">
+        <div class="b-label">Who am I</div>
+        <div class="b-title">Allen Chihen-Tai</div>
+        <div class="b-sub">Computer + Quantum Mechanics · Chemistry · Discord: Microdaery</div>
+      </div>
+      <div class="bento-block rose">
+        <div class="b-label">Status</div>
+        <div class="b-title">👑 Elden Lord</div>
+        <div class="b-sub">🦈 Pull Shark · Pro</div>
+      </div>
+    </div>
+
+    <div class="section-label">// PROJECTS</div>
+    <div class="s-bento grid-2">
+      <div class="bento-block sky">
+        <div class="b-label">Python · ⭐ 2</div>
+        <div class="b-title">Polymarket BTC Bot</div>
+        <div class="b-sub">Crypto prediction market trading bot</div>
+      </div>
+      <div class="bento-block indigo">
+        <div class="b-label">HTML · ⭐ 2</div>
+        <div class="b-title">chem.github.io</div>
+        <div class="b-sub">Chemistry static website</div>
+      </div>
+    </div>
+
+    <div class="section-label">// SKILLS</div>
+    <div class="s-bento grid-3eq">
+      <div class="bento-block mint">
+        <div class="b-label">Code</div>
+        <div class="b-title">Python · HTML · Java</div>
+      </div>
+      <div class="bento-block indigo">
+        <div class="b-label">Science</div>
+        <div class="b-title">Quantum · Chemistry</div>
+      </div>
+      <div class="bento-block amber">
+        <div class="b-label">GitHub</div>
+        <div class="b-title">16 Repos · Pro 🌟</div>
+      </div>
+    </div>
+
+    <div class="s-footer">✦ chihen-tai.github.io · github.com/Chihen-Tai · Discord: Microdaery ✦</div>
+  </div>
+
+  <!-- RIGHT DECO -->
+  <div class="deco-col">
+    <div class="deco-sticker" style="background:linear-gradient(160deg,#1a1050,#2a1870);border-color:#bb99ff;">🌙</div>
+    <div class="deco-sticker" style="background:linear-gradient(160deg,#0a1830,#102240);border-color:#66aaff;">🌊</div>
+    <div class="deco-sticker" style="background:linear-gradient(160deg,#201040,#301860);border-color:#ee88ff;">✨</div>
+    <div class="deco-sticker" style="background:linear-gradient(160deg,#102010,#182e18);border-color:#55ee99;">🍀</div>
+    <div class="deco-sticker" style="background:linear-gradient(160deg,#1e0820,#2e1030);border-color:#ff88dd;">🌸</div>
+    <div class="deco-note">實際用<br>真實動漫<br>角色圖片<br>(png with<br>透明背景)</div>
+  </div>
+
+</div>
+
+<div class="notes-grid">
+  <div class="note-card">
+    <strong>🎨 背景色改動</strong>
+    <p>深海藍靛 #0d1130 取代純黑，有層次感、視覺更溫暖開朗</p>
+  </div>
+  <div class="note-card">
+    <strong>🖼️ 左側貼圖導航</strong>
+    <p>圓形動漫角色貼圖當 nav 按鈕，hover 會搖晃 + 放大，實際用真實動漫圖（透明背景 PNG）</p>
+  </div>
+  <div class="note-card">
+    <strong>✨ 右側裝飾貼圖</strong>
+    <p>方形貼圖隨機散佈，純裝飾，增加宅宅氛圍。也可換成你喜歡的角色</p>
+  </div>
+</div>
+
+<div class="confirm-bar" data-choice="ok" onclick="toggleSelect(this)">
+  ✦ 這個方向 OK？點確認 — 或告訴我要換色調 / 換貼圖風格
+</div>
+
+<script>
+function toggleSelect(el) {
+  el.style.boxShadow = '0 0 30px rgba(120,150,255,0.65)';
+  el.style.borderColor = '#8899ff';
+  el.style.color = '#ddeeff';
+  el.textContent = '✦ 確認！開始寫設計文件和實作計畫';
+  if (window.recordChoice) window.recordChoice('ok', 'layout-v3-confirmed');
+}
+</script>
+
+</body>
+</html>

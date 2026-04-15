@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Layout Mockup</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #e0e0ff;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+  }
+  h2 { color: #00ffff; font-size: 1.3rem; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; }
+  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 24px; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .card {
+    border: 1px solid #222;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    background: #0d0d1a;
+  }
+  .card:hover { border-color: #00ffff; transform: translateY(-2px); }
+  .card.selected { border-color: #00ffff; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+
+  .card-image {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* OPTION A — Cyberpunk EVA */
+  .hero-a {
+    width:100%; height:100%;
+    background: linear-gradient(135deg, #000010 0%, #0a0020 50%, #000510 100%);
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .hero-a .scan-lines {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,200,0.03) 2px, rgba(0,255,200,0.03) 4px);
+    pointer-events: none;
+  }
+  .hero-a .glitch-name {
+    font-size: 2.2rem; font-weight: 900; color: #00ffcc;
+    text-shadow: 2px 0 #ff0066, -2px 0 #00ccff;
+    letter-spacing: 4px; position: relative; z-index: 1;
+    text-transform: uppercase;
+  }
+  .hero-a .corner {
+    position: absolute; top: 10px; left: 10px;
+    width: 20px; height: 20px;
+    border-top: 2px solid #00ffcc; border-left: 2px solid #00ffcc;
+  }
+  .hero-a .corner.br {
+    top: auto; left: auto; bottom: 10px; right: 10px;
+    border-top: none; border-left: none;
+    border-bottom: 2px solid #00ffcc; border-right: 2px solid #00ffcc;
+  }
+  .particle {
+    position: absolute; width: 2px; height: 2px;
+    background: #00ffcc; border-radius: 50%; opacity: 0.6;
+  }
+
+  /* OPTION B — Galaxy Magic */
+  .hero-b {
+    width:100%; height:100%;
+    background: radial-gradient(ellipse at center, #1a0533 0%, #050010 70%);
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .star {
+    position: absolute; border-radius: 50%;
+    background: white; opacity: 0.8;
+  }
+  .hero-b .name-glow {
+    font-size: 2.2rem; font-weight: 900; position: relative; z-index: 1;
+    background: linear-gradient(135deg, #ff88ff, #88aaff, #ffaaff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 3px; text-transform: uppercase;
+    filter: drop-shadow(0 0 20px rgba(200,100,255,0.8));
+  }
+  .magic-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(180, 100, 255, 0.3);
+    top:50%; left:50%; transform:translate(-50%,-50%);
+  }
+
+  /* OPTION C — Terminal */
+  .hero-c {
+    width:100%; height:100%;
+    background: #000300;
+    position:relative; display:flex; align-items:center; justify-content:center;
+    font-family: 'Courier New', monospace;
+  }
+  .terminal-text { position: relative; z-index: 1; text-align: left; padding: 20px; width: 100%; }
+  .prompt { color: #00ff00; font-size: 0.75rem; margin-bottom: 4px; }
+  .cmd { color: #88ff88; font-size: 0.75rem; }
+  .t-output { color: #44ff44; font-size: 1.4rem; font-weight: bold; letter-spacing: 2px; margin: 8px 0; }
+  .cursor { display: inline-block; width: 10px; height: 1.2em; background: #00ff00; vertical-align: text-bottom; }
+
+  /* OPTION D — Bento */
+  .hero-d {
+    width:100%; height:100%;
+    background: #0f0f1a;
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .bento {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px; width: 90%; height: 85%; padding: 8px;
+  }
+  .bento-cell {
+    background: #161628; border-radius: 4px;
+    border: 1px solid #2a2a4a;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; color: #8888aa; text-align: center; padding: 4px;
+  }
+  .bento-cell.main {
+    grid-row: 1 / 3; color: #00ccff; font-size: 1.2rem; font-weight: bold;
+    border-color: #00ccff44; flex-direction: column; gap: 4px;
+  }
+  .bento-cell.accent { border-color: #ff00aa44; color: #ff88cc; }
+  .bento-cell.green { border-color: #00ff8844; color: #00ff88; }
+
+  .card-body { padding: 14px 16px; }
+  .card-body h3 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; }
+  .card-body p { color: #888; font-size: 0.8rem; line-height: 1.5; }
+  .tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag {
+    background: #1a1a2e; color: #00ccff; font-size: 0.65rem;
+    padding: 2px 8px; border-radius: 10px; border: 1px solid #00ccff33;
+  }
+
+  .pick-note {
+    margin-top: 20px; padding: 12px 16px;
+    background: #0d1a0d; border: 1px solid #00ff4433;
+    border-radius: 6px; color: #00ff88; font-size: 0.8rem; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h2>Hero 區塊設計方向</h2>
+<p class="subtitle">點選你最喜歡的 Hero 視覺風格 — 這是進入網站第一眼看到的畫面</p>
+
+<div class="cards">
+
+  <!-- OPTION A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="hero-a">
+        <div class="scan-lines"></div>
+        <div class="corner"></div>
+        <div class="corner br"></div>
+        <div class="particle" style="top:15%;left:20%"></div>
+        <div class="particle" style="top:30%;left:75%"></div>
+        <div class="particle" style="top:60%;left:40%"></div>
+        <div class="particle" style="top:80%;left:85%"></div>
+        <div class="particle" style="top:45%;left:10%"></div>
+        <div style="text-align:center;z-index:1;position:relative;">
+          <div class="glitch-name">ALLEN</div>
+          <div style="color:#00ffcc88;font-size:0.6rem;letter-spacing:4px;margin-top:6px;">// SYSTEM INITIALIZED</div>
+        </div>
+        <div style="position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#00ff8888;font-size:0.6rem;letter-spacing:3px;">CHIHEN-TAI · ELDEN LORD</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — 賽博龐克 EVA 風</h3>
+      <p>掃描線、Glitch 文字、霓虹角落框架。像電腦開機的質感。</p>
+      <div class="tags">
+        <span class="tag">Three.js 粒子</span>
+        <span class="tag">Glitch 特效</span>
+        <span class="tag">掃描線</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="hero-b">
+        <div class="star" style="width:2px;height:2px;top:10%;left:15%"></div>
+        <div class="star" style="width:3px;height:3px;top:25%;left:70%"></div>
+        <div class="star" style="width:1px;height:1px;top:50%;left:30%"></div>
+        <div class="star" style="width:2px;height:2px;top:70%;left:80%"></div>
+        <div class="star" style="width:2px;height:2px;top:85%;left:45%"></div>
+        <div class="star" style="width:3px;height:3px;top:60%;left:20%"></div>
+        <div class="magic-ring" style="width:160px;height:160px;"></div>
+        <div class="magic-ring" style="width:110px;height:110px;"></div>
+        <div style="text-align:center;z-index:1;position:relative;">
+          <div class="name-glow">ALLEN</div>
+          <div style="color:#cc88ff88;font-size:0.6rem;letter-spacing:3px;margin-top:8px;">✦ quantum · chem · code ✦</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — 宇宙魔法銀河風</h3>
+      <p>星空背景、紫色漸層光暈、魔法陣圈圈。比較夢幻飄渺。</p>
+      <div class="tags">
+        <span class="tag">星空粒子</span>
+        <span class="tag">漸層發光</span>
+        <span class="tag">魔法陣</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="hero-c">
+        <div class="terminal-text">
+          <div class="prompt">root@chihen-tai:~$ whoami</div>
+          <div class="t-output">ALLEN CHIHEN-TAI</div>
+          <div class="prompt" style="margin-top:8px;">root@chihen-tai:~$ cat interests.txt</div>
+          <div class="cmd">quantum · chemistry · code</div>
+          <div class="prompt" style="margin-top:8px;">root@chihen-tai:~$ echo $TITLE</div>
+          <div class="cmd">ELDEN LORD <span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — 駭客終端機風</h3>
+      <p>全綠色終端機，像真的在打指令。有 Typing 動畫效果。</p>
+      <div class="tags">
+        <span class="tag">Typed.js</span>
+        <span class="tag">CRT 效果</span>
+        <span class="tag">終端機感</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION D -->
+  <div class="card" data-choice="d" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="hero-d">
+        <div class="bento">
+          <div class="bento-cell main">
+            <div style="font-size:0.6rem;color:#00ccff88;letter-spacing:2px;">ALLEN</div>
+            <div style="font-size:1.4rem;font-weight:900;">Chihen-Tai</div>
+            <div style="font-size:0.55rem;color:#8888aa;margin-top:4px;">Elden Lord · Quantum Mage</div>
+          </div>
+          <div class="bento-cell accent">⚗️<br/><span style="font-size:0.6rem">Chemistry</span></div>
+          <div class="bento-cell green">⚡<br/><span style="font-size:0.6rem">Polymarket Bot</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>D — Bento Grid 格子風</h3>
+      <p>像 Apple 發表會那種分格卡片佈局。現代感強、清楚展示資訊。</p>
+      <div class="tags">
+        <span class="tag">Bento Grid</span>
+        <span class="tag">卡片動畫</span>
+        <span class="tag">現代感</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="pick-note">
+  💡 也可以混搭 — 例如 A 的 Hero + D 的 Projects 區塊
+</div>
+
+<script>
+function toggleSelect(el) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  if (window.recordChoice) window.recordChoice(el.dataset.choice, el.querySelector('h3').textContent);
+}
+</script>
+
+</body>
+</html>
