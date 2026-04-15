@@ -12,12 +12,20 @@
   <link rel="stylesheet" href="css/stickers.css" />
 
   <!-- Three.js r128 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+          integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu"
+          crossorigin="anonymous" defer></script>
   <!-- GSAP 3.12.2 + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+          integrity="sha384-d+vyQ0dYcymoP8ndq2hW7FGC50nqGdXUEgoOUGxbbkAJwZqL7h+jKN0GGgn9hFDS"
+          crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+          integrity="sha384-poC0r6usQOX2Ayt/VGA+t81H6V3iN9L+Irz9iO8o+s0X20tLpzc9DOOtnKxhaQSE"
+          crossorigin="anonymous" defer></script>
   <!-- Typed.js 2.0.12 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
+          integrity="sha384-NMn9+T8zIKnDUstqb5le7vdLNSyAgSU9DtEPT/b7ks9NJQpPk4Dc9b1tI8oyzimc"
+          crossorigin="anonymous" defer></script>
 </head>
 <body>
 
@@ -41,27 +49,27 @@
   <aside id="sticker-nav-left" aria-label="Section shortcuts">
     <div class="sticker-wrap">
       <button class="sticker" id="sticker-wiz"
-        onclick="scrollTo('about')"
+        onclick="scrollToSection('about')"
         aria-label="Go to About section">🧙‍♀️</button>
     </div>
     <div class="sticker-wrap">
       <button class="sticker" id="sticker-bot"
-        onclick="scrollTo('projects')"
+        onclick="scrollToSection('projects')"
         aria-label="Go to Projects section">🤖</button>
     </div>
     <div class="sticker-wrap">
       <button class="sticker" id="sticker-chem"
-        onclick="scrollTo('skills')"
+        onclick="scrollToSection('skills')"
         aria-label="Go to Skills section">⚗️</button>
     </div>
     <div class="sticker-wrap">
       <button class="sticker" id="sticker-sword"
-        onclick="scrollTo('elden')"
+        onclick="scrollToSection('elden')"
         aria-label="Go to Achievements section">⚔️</button>
     </div>
     <div class="sticker-wrap">
       <button class="sticker" id="sticker-mail"
-        onclick="scrollTo('contact')"
+        onclick="scrollToSection('contact')"
         aria-label="Go to Contact section">✉️</button>
     </div>
   </aside>
@@ -103,7 +111,7 @@
 
     <!-- About ─────────────────────────────────────────────────────────── -->
     <section id="about" class="content-section" aria-labelledby="about-label">
-      <p class="section-label" id="about-label">// ABOUT</p>
+      <h2 class="section-label" id="about-label" data-prefix="//">ABOUT</h2>
       <div class="bento-grid grid-3">
         <div class="bento-block indigo span-2">
           <h2>Who am I?</h2>
@@ -121,7 +129,7 @@
 
     <!-- Projects ──────────────────────────────────────────────────────── -->
     <section id="projects" class="content-section" aria-labelledby="projects-label">
-      <p class="section-label" id="projects-label">// PROJECTS</p>
+      <h2 class="section-label" id="projects-label" data-prefix="//">PROJECTS</h2>
       <div class="bento-grid grid-2" id="projects-grid">
         <!-- Populated dynamically by js/github.js -->
       </div>
@@ -129,7 +137,7 @@
 
     <!-- Skills ────────────────────────────────────────────────────────── -->
     <section id="skills" class="content-section" aria-labelledby="skills-label">
-      <p class="section-label" id="skills-label">// SKILLS &amp; INTERESTS</p>
+      <h2 class="section-label" id="skills-label" data-prefix="//">SKILLS &amp; INTERESTS</h2>
       <div class="bento-grid grid-3-eq">
         <div class="bento-block mint">
           <h2>Languages</h2>
@@ -158,7 +166,7 @@
 
     <!-- Achievements ──────────────────────────────────────────────────── -->
     <section id="elden" class="content-section" aria-labelledby="elden-label">
-      <p class="section-label" id="elden-label">// ACHIEVEMENTS</p>
+      <h2 class="section-label" id="elden-label" data-prefix="//">ACHIEVEMENTS</h2>
       <div class="bento-grid grid-2">
         <div class="bento-block rose">
           <h2>👑 ELDEN LORD</h2>
@@ -205,11 +213,11 @@
 
   <script>
     /**
-     * scrollTo — smooth-scroll to a named section by id.
+     * scrollToSection — smooth-scroll to a named section by id.
      * Called from onclick attributes on sticker nav buttons.
      * @param {string} id - The target section's id attribute value
      */
-    function scrollTo(id) {
+    function scrollToSection(id) {
       const target = document.getElementById(id);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
