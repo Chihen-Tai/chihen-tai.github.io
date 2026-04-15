@@ -1,42 +1,50 @@
-/* css/tokens.css */
+/* css/tokens.css — Genshin Impact × Wuthering Waves × SAO palette */
 :root {
-  /* Background */
-  --bg-base:        #0d1130;
-  --bg-nav:         rgba(13, 15, 42, 0.98);
-  --bg-footer:      #0a0e28;
+  /* Base */
+  --bg-base:              #060c1a;
+  --bg-nav:               rgba(4,8,24,0.97);
+  --bg-footer:            #030610;
 
-  /* Bento block backgrounds */
-  --bg-indigo:      #181e50;
-  --bg-rose:        #2a1228;
-  --bg-sky:         #0a1e38;
-  --bg-mint:        #081e16;
-  --bg-amber:       #1e1400;
+  /* Gold panel (Genshin Impact) */
+  --bg-gold:              #1a1400;
+  --bg-gold-alt:          #221a00;
+  --border-gold:          rgba(255,200,60,0.35);
+  --glow-gold:            rgba(255,180,30,0.14);
+  --text-gold:            #ffdd88;
+  --text-gold-sub:        #cc9922;
 
-  /* Bento border colors */
-  --border-indigo:  #5566dd;
-  --border-rose:    #ee44aa;
-  --border-sky:     #2299ee;
-  --border-mint:    #22dd99;
-  --border-amber:   #ffbb22;
-  --border-nav:     #3344bb;
+  /* Holo panel (SAO) */
+  --bg-holo:              #030d1f;
+  --bg-holo-alt:          #061428;
+  --border-holo:          rgba(80,180,255,0.35);
+  --glow-holo:            rgba(60,160,255,0.15);
+  --text-holo:            #88ccff;
+  --text-holo-sub:        #4477aa;
+
+  /* Resonance panel (Wuthering Waves) */
+  --bg-resonance:         #110a28;
+  --bg-resonance-alt:     #180e38;
+  --border-resonance:     rgba(160,100,255,0.4);
+  --glow-resonance:       rgba(140,80,255,0.18);
+  --text-resonance:       #c8aaff;
+  --text-resonance-sub:   #8866bb;
+
+  /* Hero gradient stops */
+  --hero-gold:            #ffdd88;
+  --hero-white:           #fff8cc;
+  --hero-purple:          #c8aaff;
+  --hero-blue:            #88ccff;
+
+  /* Nav */
+  --logo-color:           #ffdd88;
+  --border-nav:           rgba(80,180,255,0.3);
 
   /* Text */
-  --text-primary:   #f0e8ff;
-  --text-muted:     #8899cc;
-  --text-indigo:    #99aaff;
-  --text-rose:      #ff88cc;
-  --text-sky:       #66ccff;
-  --text-mint:      #55ffbb;
-  --text-amber:     #ffdd66;
-
-  /* Hero */
-  --hero-glow-a:    #ff88ee;
-  --hero-glow-b:    #bb99ff;
-  --hero-glow-c:    #88ddff;
-  --logo-color:     #ff99ee;
+  --text-primary:         #e8f0ff;
+  --text-muted:           #6688aa;
 
   /* Stickers */
-  --sticker-border: #ffffff;
+  --sticker-border:       rgba(255,255,255,0.6);
 
   /* Timing */
   --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);

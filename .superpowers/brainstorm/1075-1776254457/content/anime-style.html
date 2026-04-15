@@ -1,0 +1,70 @@
+<h2>Which anime visual direction?</h2>
+<p class="subtitle">Your site already has galaxy/magic vibes. Pick the direction that excites you most — we'll intensify it.</p>
+
+<div class="cards">
+
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d1130;padding:20px;font-family:monospace;min-height:180px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,255,80,0.03) 0px,rgba(0,255,80,0.03) 1px,transparent 1px,transparent 4px)"></div>
+      <div style="color:#00ff88;font-size:0.6rem;letter-spacing:3px;margin-bottom:8px">[ SYSTEM INITIALIZING ]</div>
+      <div style="color:#ff4488;font-size:1.4rem;font-weight:900;letter-spacing:6px;text-shadow:0 0 20px #ff4488,0 0 40px #ff4488">ALLEN</div>
+      <div style="color:#00ffee;font-size:0.5rem;letter-spacing:2px;margin-top:4px">UNIT-01 SYNC RATE: 99.8%</div>
+      <div style="position:absolute;bottom:12px;left:20px;right:20px">
+        <div style="height:3px;background:linear-gradient(90deg,#00ff88,#ff4488,#00ffee);border-radius:2px;width:75%"></div>
+        <div style="color:#445566;font-size:0.45rem;margin-top:4px;letter-spacing:1px">NERV // A.T. FIELD ACTIVE</div>
+      </div>
+      <div style="position:absolute;top:12px;right:16px;width:28px;height:28px;border:1px solid #ff4488;border-radius:50%;display:flex;align-items:center;justify-content:center">
+        <div style="width:8px;height:8px;background:#ff4488;border-radius:50%"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Evangelion / Mecha HUD</h3>
+      <p>NERV-style terminal aesthetic. Scanlines, hexagonal HUD overlays, AT Field energy rings, sync-rate progress bars. Boot screen becomes a NERV system boot. Very dramatic, techy, iconic.</p>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#0a0018,#1a0035);padding:20px;min-height:180px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:10px;left:15px;font-size:1.5rem;opacity:0.7">✦</div>
+      <div style="position:absolute;top:25px;right:20px;font-size:1rem;opacity:0.5">🌸</div>
+      <div style="position:absolute;bottom:30px;left:30px;font-size:0.8rem;opacity:0.6">⭐</div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+        <div style="width:60px;height:60px;border-radius:50%;background:conic-gradient(from 0deg,#ff88cc,#cc88ff,#88aaff,#ff88cc);margin:0 auto 8px;box-shadow:0 0 30px rgba(255,120,220,0.6)"></div>
+        <div style="color:#ffccee;font-size:0.9rem;font-weight:900;letter-spacing:4px;text-shadow:0 0 12px rgba(255,150,230,0.8)">ALLEN</div>
+        <div style="color:#cc99ff;font-size:0.45rem;letter-spacing:2px;margin-top:3px">✦ MAGICAL PORTFOLIO ✦</div>
+      </div>
+      <div style="position:absolute;bottom:8px;right:12px;font-size:1.2rem;opacity:0.4">🌙</div>
+    </div>
+    <div class="card-body">
+      <h3>B — Magical Girl / Sailor Moon</h3>
+      <p>Soft neon pinks, conic-gradient orbs, sakura particles raining down, prismatic sparkles on hover. Transformation sequence loading screen. Moon prism power — elegant and dreamy.</p>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#080c1a;padding:20px;min-height:180px;position:relative;overflow:hidden;font-family:monospace">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,200,255,0.02) 0px,rgba(0,200,255,0.02) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(0deg,rgba(0,200,255,0.02) 0px,rgba(0,200,255,0.02) 1px,transparent 1px,transparent 40px)"></div>
+      <div style="position:absolute;top:8px;left:8px;right:8px;height:1px;background:linear-gradient(90deg,transparent,#00eeff,transparent)"></div>
+      <div style="position:absolute;bottom:8px;left:8px;right:8px;height:1px;background:linear-gradient(90deg,transparent,#ff0088,transparent)"></div>
+      <div style="position:absolute;top:50%;transform:translateY(-50%);width:100%;text-align:center">
+        <div style="font-size:1.6rem;font-weight:900;letter-spacing:8px;background:linear-gradient(90deg,#00eeff,#ff0088);-webkit-background-clip:text;-webkit-text-fill-color:transparent">ALLEN</div>
+        <div style="color:#00eeff;font-size:0.45rem;letter-spacing:3px;margin-top:6px;opacity:0.7">GHOST // SECTION 9</div>
+        <div style="margin-top:10px;display:flex;justify-content:center;gap:6px">
+          <div style="width:4px;height:4px;background:#00eeff;border-radius:50%;box-shadow:0 0 6px #00eeff"></div>
+          <div style="width:4px;height:4px;background:#ff0088;border-radius:50%;box-shadow:0 0 6px #ff0088"></div>
+          <div style="width:4px;height:4px;background:#00eeff;border-radius:50%;box-shadow:0 0 6px #00eeff"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Cyberpunk / Ghost in the Shell</h3>
+      <p>Teal × magenta neon duotone, glitch text effects on hover, digital rain particles, circuit trace lines as section dividers. Sleek, dark, and intense.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px">Click to select. You can pick multiple if you want a mix.</p>

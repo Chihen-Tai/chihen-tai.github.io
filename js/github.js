@@ -11,12 +11,13 @@
 
   function renderCard(repo) {
     var isPinned = PINNED.indexOf(repo.name) !== -1;
-    var color    = isPinned ? 'sky' : 'indigo';
-    return '<a class="bento-block ' + color + ' repo-card" href="' + repo.html_url + '" target="_blank" rel="noopener">'
-      + (isPinned ? '<span class="pinned-badge">📌 Pinned</span>' : '')
-      + '<span class="b-label">' + (repo.language || 'Code') + ' · ⭐ ' + repo.stargazers_count + '</span>'
-      + '<h3 class="b-title">' + repo.name + '</h3>'
-      + '<p class="b-sub">' + (repo.description || 'No description') + '</p>'
+    var panel    = isPinned ? 'gold' : 'holo';
+    return '<a class="bento-block ' + panel + ' repo-card" href="' + repo.html_url + '" target="_blank" rel="noopener">'
+      + (isPinned ? '<span class="pinned-badge">◈ Featured</span>' : '')
+      + '<span class="repo-lang">' + (repo.language || 'Code') + ' · ✦ ' + repo.stargazers_count + '</span>'
+      + '<h3>' + repo.name + '</h3>'
+      + '<p>' + (repo.description || 'No description') + '</p>'
+      + '<span class="repo-link">VIEW ◈</span>'
       + '</a>';
   }
 
@@ -43,7 +44,11 @@
   var style = document.createElement('style');
   style.textContent = [
     '.repo-card { display:block; text-decoration:none; }',
-    '.pinned-badge { font-size:0.55rem; color:#aabbff; display:block; margin-bottom:4px; letter-spacing:1px; }',
+    '.pinned-badge { font-size:0.55rem; color:#ffdd88; display:block; margin-bottom:4px; letter-spacing:2px; }',
+    '.repo-lang { font-size:0.55rem; color:#4477aa; display:block; margin-bottom:4px; letter-spacing:1px; }',
+    '.repo-link { font-size:0.55rem; color:#88ccff; letter-spacing:2px; margin-top:8px; display:block; opacity:0.7; }',
+    '.bento-block.gold .repo-lang { color:#cc9922; }',
+    '.bento-block.gold .repo-link { color:#ffdd88; }',
   ].join('');
   document.head.appendChild(style);
 })();

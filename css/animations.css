@@ -1,11 +1,11 @@
 /* css/animations.css */
 
-/* MAGIC RINGS */
+/* RESONANCE RINGS — gold / blue / purple */
 @keyframes ring-rotate-cw  { from { transform: rotate(0deg);    } to { transform: rotate(360deg);  } }
 @keyframes ring-rotate-ccw { from { transform: rotate(0deg);    } to { transform: rotate(-360deg); } }
 .ring-outer { animation: ring-rotate-cw  18s linear infinite; }
-.ring-mid   { animation: ring-rotate-ccw 12s linear infinite; }
-.ring-inner { animation: ring-rotate-cw   7s linear infinite; }
+.ring-mid   { animation: ring-rotate-ccw 11s linear infinite; }
+.ring-inner { animation: ring-rotate-cw   6s linear infinite; }
 
 /* BENTO SCROLL-IN initial state — GSAP drives the reveal */
 .bento-block { opacity: 0; transform: translateY(28px); }
@@ -18,7 +18,7 @@
 }
 .meteor {
   position: absolute; width: 2px; height: 70px;
-  background: linear-gradient(180deg, rgba(200,180,255,0.9), transparent);
+  background: linear-gradient(180deg, rgba(200,170,255,0.9), transparent);
   border-radius: 1px; animation: meteor 5s ease-in infinite;
 }
 .meteor.m1 { top:  8%; left: 75%; animation-delay: 0s;   animation-duration: 4.5s; }
@@ -26,13 +26,64 @@
 .meteor.m3 { top:  5%; left: 88%; animation-delay: 2.8s; animation-duration: 4s;   }
 .meteor.m4 { top: 35%; left: 65%; animation-delay: 0.8s; animation-duration: 6s;   }
 
-/* LOADING CURSOR */
-@keyframes cursor-blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-#loading-text::after { content: '▋'; animation: cursor-blink 0.8s step-end infinite; margin-left: 2px; }
-
 /* HERO FADE-IN */
 @keyframes hero-appear { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 .hero-content { opacity: 0; animation: hero-appear 1s var(--ease-out-expo) 0.3s forwards; }
+
+/* LOADING BURST PARTICLES */
+@keyframes burst-out {
+  0%   { transform: translate(-50%,-50%) rotate(var(--angle)) translateX(0); opacity: 1; }
+  100% { transform: translate(-50%,-50%) rotate(var(--angle)) translateX(var(--dist)); opacity: 0; }
+}
+.burst-particle {
+  position: absolute; top: 50%; left: 50%; width: 3px; height: 3px;
+  border-radius: 50%; pointer-events: none;
+  animation: burst-out 0.8s ease-out forwards;
+}
+
+/* STICKER ACTIVE PULSE */
+@keyframes sticker-pulse {
+  0%,100% { box-shadow: 0 0 8px rgba(200,170,255,0.4); }
+  50%     { box-shadow: 0 0 20px rgba(200,170,255,0.8), 0 0 40px rgba(140,100,255,0.4); }
+}
+.sticker.active { animation: sticker-pulse 2s ease-in-out infinite; }
+
+/* SAKURA / GOLD PETAL DRIFT */
+@keyframes petal-drift {
+  0%   { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(110vh) translateX(var(--sway)) rotate(var(--spin)); opacity: 0; }
+}
+.petal {
+  position: fixed; top: -20px; pointer-events: none; z-index: 5;
+  width: 8px; height: 8px; border-radius: 50% 0 50% 0;
+  background: rgba(255,200,150,0.35);
+  animation: petal-drift var(--dur) ease-in var(--delay) infinite;
+}
+
+/* SPARKLE CURSOR TRAIL */
+@keyframes sparkle-fade {
+  0%   { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(var(--r)); }
+  100% { opacity: 0; transform: translate(-50%,-50%) scale(0.2) rotate(calc(var(--r) + 120deg)); }
+}
+.sparkle-glyph {
+  position: fixed; pointer-events: none; z-index: 9999;
+  font-size: 0.7rem; user-select: none;
+  animation: sparkle-fade 0.6s ease-out forwards;
+}
+
+/* RIGHT DECO FLOAT OSCILLATION */
+@keyframes float-0 { 0%,100% { transform:translateY(0px);  } 50% { transform:translateY(-8px);  } }
+@keyframes float-1 { 0%,100% { transform:translateY(-4px); } 50% { transform:translateY(6px);   } }
+@keyframes float-2 { 0%,100% { transform:translateY(3px);  } 50% { transform:translateY(-9px);  } }
+@keyframes float-3 { 0%,100% { transform:translateY(-6px); } 50% { transform:translateY(4px);   } }
+@keyframes float-4 { 0%,100% { transform:translateY(2px);  } 50% { transform:translateY(-7px);  } }
+#deco-moon  { animation: float-0 5.2s ease-in-out infinite; }
+#deco-wave  { animation: float-1 4.8s ease-in-out infinite; }
+#deco-spark { animation: float-2 6.1s ease-in-out infinite; }
+#deco-leaf  { animation: float-3 5.6s ease-in-out infinite; }
+#deco-sakura{ animation: float-4 4.4s ease-in-out infinite; }
 
 /* prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
@@ -40,4 +91,7 @@
   .meteor { animation: none; }
   .hero-content { animation: none; opacity: 1; }
   .bento-block { opacity: 1; transform: none; }
+  .petal { animation: none; display: none; }
+  .sticker.active { animation: none; }
+  #deco-moon, #deco-wave, #deco-spark, #deco-leaf, #deco-sakura { animation: none; }
 }

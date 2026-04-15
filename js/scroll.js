@@ -24,3 +24,33 @@
     );
   });
 })();
+
+// Sticker scroll-spy — highlights active section sticker
+(function () {
+  var SECTIONS = [
+    { section: 'about',     sticker: 'sticker-wiz'   },
+    { section: 'projects',  sticker: 'sticker-bot'   },
+    { section: 'skills',    sticker: 'sticker-chem'  },
+    { section: 'elden',     sticker: 'sticker-sword' },
+    { section: 'favorites', sticker: 'sticker-wiz'   },
+    { section: 'journey',   sticker: 'sticker-chem'  },
+    { section: 'status',    sticker: 'sticker-bot'   },
+    { section: 'contact',   sticker: 'sticker-mail'  },
+  ];
+
+  function onScroll() {
+    var scrollY = window.scrollY + window.innerHeight * 0.4;
+    var active  = null;
+    SECTIONS.forEach(function (s) {
+      var el = document.getElementById(s.section);
+      if (el && el.offsetTop <= scrollY) active = s.sticker;
+    });
+    SECTIONS.forEach(function (s) {
+      var btn = document.getElementById(s.sticker);
+      if (btn) btn.classList.toggle('active', s.sticker === active);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();

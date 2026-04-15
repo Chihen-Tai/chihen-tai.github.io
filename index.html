@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Allen — Portfolio</title>
 
-  <!-- Design tokens must load first so all downstream sheets can inherit vars -->
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/animations.css" />
@@ -31,16 +30,18 @@
 
   <!-- ─── Loading screen ─────────────────────────────────────────────────── -->
   <div id="loading-screen">
+    <div id="loading-burst" aria-hidden="true"></div>
     <div id="loading-text"></div>
   </div>
 
   <!-- ─── Navigation ────────────────────────────────────────────────────── -->
   <nav id="main-nav" aria-label="Main navigation">
-    <a class="nav-logo" href="#hero">✦ ALLEN</a>
+    <a class="nav-logo" href="#hero">◈ ALLEN</a>
     <ul class="nav-links" role="list">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#favorites">Collection</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -100,27 +101,28 @@
         <h1 class="hero-name" id="hero-name">Allen</h1>
         <p class="hero-sub"></p>
         <div class="hero-badges" role="list" aria-label="Roles and interests">
-          <span class="badge" role="listitem">Developer</span>
-          <span class="badge" role="listitem">Chemist</span>
-          <span class="badge" role="listitem">Gamer</span>
-          <span class="badge" role="listitem">Open Source</span>
-          <span class="badge" role="listitem">Student</span>
+          <span class="badge" role="listitem">⚗️ Chemist</span>
+          <span class="badge" role="listitem">⚡ Dev</span>
+          <span class="badge" role="listitem">👑 Elden Lord</span>
+          <span class="badge" role="listitem">🌌 Traveler</span>
+          <span class="badge" role="listitem">🦈 Pull Shark</span>
+          <span class="badge" role="listitem">🌊 Resonator</span>
         </div>
       </div>
     </section>
 
     <!-- About ─────────────────────────────────────────────────────────── -->
     <section id="about" class="content-section" aria-labelledby="about-label">
-      <h2 class="section-label" id="about-label" data-prefix="//">ABOUT</h2>
+      <h2 class="section-label" id="about-label"><span class="label-text">ABOUT</span></h2>
       <div class="bento-grid grid-3">
-        <div class="bento-block indigo span-2">
+        <div class="bento-block holo span-2">
           <h2>Who am I?</h2>
           <p>
             A developer and chemist passionate about building elegant tools,
             exploring open-source ecosystems, and diving deep into game lore.
           </p>
         </div>
-        <div class="bento-block rose">
+        <div class="bento-block gold">
           <h2>Currently</h2>
           <p>Studying, building, and leveling up one commit at a time.</p>
         </div>
@@ -129,7 +131,7 @@
 
     <!-- Projects ──────────────────────────────────────────────────────── -->
     <section id="projects" class="content-section" aria-labelledby="projects-label">
-      <h2 class="section-label" id="projects-label" data-prefix="//">PROJECTS</h2>
+      <h2 class="section-label" id="projects-label"><span class="label-text">PROJECTS</span></h2>
       <div class="bento-grid grid-2" id="projects-grid">
         <!-- Populated dynamically by js/github.js -->
       </div>
@@ -137,9 +139,9 @@
 
     <!-- Skills ────────────────────────────────────────────────────────── -->
     <section id="skills" class="content-section" aria-labelledby="skills-label">
-      <h2 class="section-label" id="skills-label" data-prefix="//">SKILLS &amp; INTERESTS</h2>
+      <h2 class="section-label" id="skills-label"><span class="label-text">SKILLS &amp; INTERESTS</span></h2>
       <div class="bento-grid grid-3-eq">
-        <div class="bento-block mint">
+        <div class="bento-block resonance">
           <h2>Languages</h2>
           <ul>
             <li>Python</li>
@@ -148,7 +150,7 @@
             <li>Dart / Flutter</li>
           </ul>
         </div>
-        <div class="bento-block indigo">
+        <div class="bento-block holo">
           <h2>Tools &amp; Frameworks</h2>
           <ul>
             <li>React / Next.js</li>
@@ -157,7 +159,7 @@
             <li>Docker</li>
           </ul>
         </div>
-        <div class="bento-block amber">
+        <div class="bento-block gold">
           <h2 id="github-stats">GitHub Stats</h2>
           <p>Loading…</p>
         </div>
@@ -166,15 +168,65 @@
 
     <!-- Achievements ──────────────────────────────────────────────────── -->
     <section id="elden" class="content-section" aria-labelledby="elden-label">
-      <h2 class="section-label" id="elden-label" data-prefix="//">ACHIEVEMENTS</h2>
+      <h2 class="section-label" id="elden-label"><span class="label-text">ACHIEVEMENTS</span></h2>
       <div class="bento-grid grid-2">
-        <div class="bento-block rose">
+        <div class="bento-block gold">
           <h2>👑 ELDEN LORD</h2>
           <p>Defeated every boss in Elden Ring. The fingers guide no more.</p>
         </div>
-        <div class="bento-block indigo">
+        <div class="bento-block resonance">
           <h2>🦈 Pull Shark</h2>
           <p>Merged pull requests that others have used. Contributions that matter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Favorites Collection ──────────────────────────────────────────── -->
+    <section id="favorites" aria-labelledby="favorites-label">
+      <h2 class="section-label" id="favorites-label"><span class="label-text">COLLECTION</span></h2>
+      <div class="fav-grid">
+        <div class="fav-card"><span>⚔️</span>Elden Ring</div>
+        <div class="fav-card"><span>🌊</span>Wuthering Waves</div>
+        <div class="fav-card"><span>✨</span>Genshin Impact</div>
+        <div class="fav-card"><span>🗡️</span>Sword Art Online</div>
+        <div class="fav-card"><span>🤖</span>Evangelion</div>
+        <div class="fav-card"><span>🌌</span>Honkai: Star Rail</div>
+        <div class="fav-card"><span>🔮</span>Re:Zero</div>
+      </div>
+    </section>
+
+    <!-- Resonance Log Timeline ────────────────────────────────────────── -->
+    <section id="journey" aria-labelledby="journey-label">
+      <h2 class="section-label" id="journey-label"><span class="label-text">RESONANCE LOG</span></h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">2020</div>
+          <div class="tl-text">First line of code — unlocked: Developer</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2022</div>
+          <div class="tl-text">First open source PR merged — Pull Shark acquired</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2024</div>
+          <div class="tl-text">chem.github.io launched — Chemist + Dev synced</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">NOW</div>
+          <div class="tl-text">Building in the open. Resonance level: MAX ✦</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Now Playing / Status ──────────────────────────────────────────── -->
+    <section id="status" aria-labelledby="status-label">
+      <h2 class="section-label" id="status-label"><span class="label-text">NOW PLAYING</span></h2>
+      <div class="now-playing-card">
+        <div class="now-art">🎵</div>
+        <div class="now-info">
+          <div class="now-title">Wuthering Waves OST</div>
+          <div class="now-sub">Currently exploring · Resonator mode active</div>
+          <div class="now-bar"><div class="now-fill"></div></div>
         </div>
       </div>
     </section>
@@ -191,7 +243,7 @@
     </div>
 
     <div class="footer-content">
-      <p class="footer-title">✦ Let's connect</p>
+      <p class="footer-title">✦ LET'S CONNECT</p>
       <ul class="footer-links" role="list">
         <li>
           <a href="https://github.com/Chihen-Tai" target="_blank" rel="noopener noreferrer"
@@ -207,7 +259,7 @@
       <button class="spell-btn" onclick="spawnSpell(this)" aria-label="Cast a spell">
         ✦ DO NOT PRESS ✦
       </button>
-      <p class="footer-sub">Built with ✦ and too much caffeine.</p>
+      <p class="footer-sub">built with resonance and too much caffeine</p>
     </div>
   </footer>
 
@@ -216,13 +268,15 @@
   <script src="js/stars.js" defer></script>
   <script src="js/github.js" defer></script>
   <script src="js/scroll.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+  <script src="js/petals.js" defer></script>
 
   <style>
     .spell-btn {
       margin-top: 18px;
       background: linear-gradient(135deg, #1a0840, #2a1060);
       border: 1px solid #9944ee;
-      border-radius: 24px;
+      border-radius: 4px;
       color: #cc88ff;
       font-family: 'Courier New', monospace;
       font-size: 0.75rem;
@@ -237,10 +291,8 @@
       transform: scale(1.05);
     }
     .spell-particle {
-      position: fixed;
-      pointer-events: none;
-      font-size: 1.4rem;
-      z-index: 9999;
+      position: fixed; pointer-events: none;
+      font-size: 1.4rem; z-index: 9999;
       animation: spell-fly 1.2s ease-out forwards;
     }
     @keyframes spell-fly {
@@ -248,22 +300,15 @@
       100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3) rotate(360deg); }
     }
     .spell-msg {
-      position: fixed;
-      top: 50%;
-      left: 50%;
+      position: fixed; top: 50%; left: 50%;
       transform: translate(-50%, -50%) scale(0.6);
       background: linear-gradient(135deg, #1a0840, #2a1060);
-      border: 2px solid #cc66ff;
-      border-radius: 16px;
-      padding: 28px 48px;
-      color: #ff88ff;
+      border: 2px solid #cc66ff; border-radius: 16px;
+      padding: 28px 48px; color: #ff88ff;
       font-family: 'Courier New', monospace;
-      font-size: 1.2rem;
-      letter-spacing: 4px;
-      text-align: center;
+      font-size: 1.2rem; letter-spacing: 4px; text-align: center;
       box-shadow: 0 0 60px rgba(200, 50, 255, 0.6);
-      z-index: 9998;
-      animation: spell-pop 1.8s ease-out forwards;
+      z-index: 9998; animation: spell-pop 1.8s ease-out forwards;
       pointer-events: none;
     }
     @keyframes spell-pop {
@@ -272,32 +317,26 @@
       80%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
       100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
     }
+    .discord-text { color: #8899dd; font-size: 0.75rem; }
   </style>
 
   <script>
-    /**
-     * scrollToSection — smooth-scroll to a named section by id.
-     * Called from onclick attributes on sticker nav buttons.
-     * @param {string} id - The target section's id attribute value
-     */
     function scrollToSection(id) {
-      const target = document.getElementById(id);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      var target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function spawnSpell(btn) {
       var emojis = ['✨','🌸','⚗️','🌙','💜','⚡','🔮','👑','🌌','🦄'];
       var rect = btn.getBoundingClientRect();
       var cx = rect.left + rect.width / 2;
-      var cy = rect.top + rect.height / 2;
+      var cy = rect.top  + rect.height / 2;
       for (var i = 0; i < 18; i++) {
         var p = document.createElement('span');
         p.className = 'spell-particle';
         p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         var angle = (i / 18) * 2 * Math.PI;
-        var dist = 80 + Math.random() * 140;
+        var dist  = 80 + Math.random() * 140;
         p.style.left = cx + 'px';
         p.style.top  = cy + 'px';
         p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');

@@ -1,4 +1,4 @@
-// js/stars.js
+// js/stars.js — 900 stars: 70% white, 20% gold-tinted, 10% blue-tinted
 (function () {
   var canvas = document.getElementById('star-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
@@ -11,19 +11,25 @@
   var camera = new THREE.PerspectiveCamera(60, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
   camera.position.z = 1;
 
-  var STAR_COUNT = 600;
-  var positions  = new Float32Array(STAR_COUNT * 3);
-  for (var i = 0; i < STAR_COUNT; i++) {
-    positions[i * 3]     = (Math.random() - 0.5) * 10;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 5;
-  }
-  var geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  var TOTAL = 900;
+  var groups = [
+    { count: Math.round(TOTAL * 0.70), color: 0xffffff, size: 0.016 },
+    { count: Math.round(TOTAL * 0.20), color: 0xffdd88, size: 0.018 },
+    { count: Math.round(TOTAL * 0.10), color: 0x88ccff, size: 0.017 },
+  ];
 
-  var mat   = new THREE.PointsMaterial({ color: 0xffffff, size: 0.018, transparent: true, opacity: 0.85 });
-  var stars = new THREE.Points(geo, mat);
-  scene.add(stars);
+  groups.forEach(function (g) {
+    var positions = new Float32Array(g.count * 3);
+    for (var i = 0; i < g.count; i++) {
+      positions[i * 3]     = (Math.random() - 0.5) * 10;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 5;
+    }
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    var mat = new THREE.PointsMaterial({ color: g.color, size: g.size, transparent: true, opacity: 0.85 });
+    scene.add(new THREE.Points(geo, mat));
+  });
 
   var mouseX = 0, mouseY = 0;
   document.addEventListener('mousemove', function (e) {
@@ -43,9 +49,11 @@
   (function animate() {
     requestAnimationFrame(animate);
     if (!prefersReduced) {
-      stars.rotation.x += (mouseY - stars.rotation.x) * 0.04;
-      stars.rotation.y += (mouseX - stars.rotation.y) * 0.04;
-      stars.rotation.z += 0.0003;
+      scene.children.forEach(function (pts) {
+        pts.rotation.x += (mouseY - pts.rotation.x) * 0.04;
+        pts.rotation.y += (mouseX - pts.rotation.y) * 0.04;
+        pts.rotation.z += 0.0003;
+      });
     }
     renderer.render(scene, camera);
   })();

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Game UI Preview</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#060c1a; color:#e8f0ff; font-family:'Segoe UI',sans-serif; padding:24px; }
+
+  h2 { text-align:center; color:#c8aaff; letter-spacing:4px; font-size:1rem; margin-bottom:6px; }
+  .sub { text-align:center; color:#7799bb; font-size:0.7rem; letter-spacing:2px; margin-bottom:28px; }
+
+  /* HERO */
+  .hero-preview {
+    position:relative; background:
+      radial-gradient(ellipse at 30% 50%,rgba(120,60,220,0.4) 0%,transparent 55%),
+      radial-gradient(ellipse at 70% 40%,rgba(60,160,255,0.3) 0%,transparent 50%),
+      radial-gradient(ellipse at 50% 90%,rgba(200,150,30,0.2) 0%,transparent 60%),
+      linear-gradient(180deg,#0b1028 0%,#060c1a 100%);
+    border:1px solid rgba(180,150,255,0.2); border-radius:12px;
+    padding:36px 24px; text-align:center; margin-bottom:20px; overflow:hidden;
+  }
+  .hero-preview::before,.hero-preview::after {
+    content:''; position:absolute; width:20px; height:20px;
+    border-color:#c8aaff; border-style:solid; opacity:0.5;
+  }
+  .hero-preview::before { top:8px; left:8px; border-width:1px 0 0 1px; }
+  .hero-preview::after  { bottom:8px; right:8px; border-width:0 1px 1px 0; }
+  .hero-topbar {
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg,transparent,#c8aaff 20%,#ffdd88 50%,#c8aaff 80%,transparent);
+    opacity:0.6;
+  }
+  .resonance-ring {
+    position:absolute; border-radius:50%; border:1px solid;
+    top:50%; left:50%; transform:translate(-50%,-50%);
+    animation:resonate 6s linear infinite;
+  }
+  .rr1 { width:160px; height:160px; border-color:rgba(180,140,255,0.3); animation-duration:8s; }
+  .rr2 { width:110px; height:110px; border-color:rgba(100,180,255,0.4); animation-duration:5s; animation-direction:reverse; }
+  .rr3 { width:65px;  height:65px;  border-color:rgba(255,210,80,0.5);  animation-duration:3s; }
+  @keyframes resonate {
+    from { transform:translate(-50%,-50%) rotate(0deg); }
+    to   { transform:translate(-50%,-50%) rotate(360deg); }
+  }
+  .hero-name {
+    position:relative; z-index:2; font-size:2.8rem; font-weight:900; letter-spacing:10px;
+    background:linear-gradient(135deg,#ffdd88,#fff8cc,#c8aaff,#88ccff);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 0 20px rgba(255,210,100,0.6)) drop-shadow(0 0 40px rgba(180,140,255,0.4));
+  }
+  .hero-subtitle { position:relative; z-index:2; font-size:0.55rem; letter-spacing:4px; color:#88aace; margin-top:8px; }
+  .hero-badges { position:relative; z-index:2; display:flex; gap:8px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
+  .badge {
+    background:rgba(100,80,200,0.3); border:1px solid rgba(180,150,255,0.4);
+    border-radius:4px; padding:3px 12px; font-size:0.6rem; letter-spacing:2px; color:#c8d8ff;
+    box-shadow:0 0 8px rgba(140,100,255,0.2),inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  /* PANEL LABEL */
+  .panel-label { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .panel-label::before { content:''; display:block; width:3px; height:14px; background:linear-gradient(180deg,#88ccff,#4466ff); border-radius:2px; }
+  .panel-label span { font-size:0.55rem; letter-spacing:4px; color:#88ccff; text-transform:uppercase; }
+  .panel-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,rgba(100,180,255,0.4),transparent); }
+
+  /* BENTO */
+  .bento { display:grid; gap:10px; margin-bottom:20px; }
+  .g2 { grid-template-columns:1fr 1fr; }
+  .g3 { grid-template-columns:1.5fr 1fr 1fr; }
+  .block { border-radius:8px; padding:14px 16px; position:relative; overflow:hidden; border:1px solid; }
+  .block::before { content:'◈'; position:absolute; top:6px; right:8px; font-size:0.55rem; opacity:0.3; }
+  .block h3 { font-size:0.8rem; font-weight:700; margin-bottom:4px; }
+  .block p  { font-size:0.62rem; color:#6688aa; line-height:1.6; }
+  .block ul { list-style:none; }
+  .block ul li { font-size:0.62rem; color:#8899bb; padding:2px 0; }
+  .block ul li::before { content:'◆ '; font-size:0.5rem; opacity:0.5; }
+  .span2 { grid-column:span 2; }
+
+  .block.gold { background:linear-gradient(135deg,#1a1400,#221a00); border-color:rgba(255,200,60,0.35); box-shadow:0 0 16px rgba(255,180,30,0.12),inset 0 1px 0 rgba(255,220,80,0.08); }
+  .block.gold::before { color:#ffdd88; }
+  .block.gold h3 { color:#ffdd88; }
+  .block.holo { background:linear-gradient(135deg,#030d1f,#061428); border-color:rgba(80,180,255,0.35); box-shadow:0 0 16px rgba(60,160,255,0.14),inset 0 1px 0 rgba(100,200,255,0.08); }
+  .block.holo::before { color:#88ccff; }
+  .block.holo h3 { color:#88ccff; }
+  .block.resonance { background:linear-gradient(135deg,#110a28,#180e38); border-color:rgba(160,100,255,0.4); box-shadow:0 0 16px rgba(140,80,255,0.18),inset 0 1px 0 rgba(200,150,255,0.08); }
+  .block.resonance::before { color:#c8aaff; }
+  .block.resonance h3 { color:#c8aaff; }
+
+  /* NEW SECTIONS */
+  .section-preview { border-radius:8px; padding:14px 16px; margin-bottom:10px; border:1px solid; position:relative; overflow:hidden; }
+  .section-preview h3 { font-size:0.7rem; font-weight:700; letter-spacing:3px; margin-bottom:8px; }
+  .section-preview.gold-s    { background:linear-gradient(135deg,#120f00,#1a1500);   border-color:rgba(255,200,60,0.25); }
+  .section-preview.gold-s h3 { color:#ffdd88; }
+  .section-preview.resonance-s { background:linear-gradient(135deg,#0e0820,#130c2a); border-color:rgba(160,100,255,0.3); }
+  .section-preview.resonance-s h3 { color:#c8aaff; }
+  .section-preview.holo-s    { background:linear-gradient(135deg,#020a18,#04101f);   border-color:rgba(80,180,255,0.3); }
+  .section-preview.holo-s h3 { color:#88ccff; }
+
+  /* Favorites */
+  .fav-grid { display:flex; gap:8px; flex-wrap:wrap; }
+  .fav-card { background:rgba(255,200,60,0.08); border:1px solid rgba(255,200,60,0.25); border-radius:6px; padding:8px 12px; font-size:0.6rem; color:#ffdd88; letter-spacing:1px; display:flex; align-items:center; gap:6px; }
+
+  /* Timeline */
+  .timeline { position:relative; padding-left:20px; }
+  .timeline::before { content:''; position:absolute; left:6px; top:0; bottom:0; width:1px; background:linear-gradient(180deg,#c8aaff,rgba(160,100,255,0.1)); }
+  .tl-item { margin-bottom:10px; position:relative; }
+  .tl-item::before { content:''; position:absolute; left:-17px; top:4px; width:7px; height:7px; border-radius:50%; background:#c8aaff; box-shadow:0 0 8px #c8aaff; }
+  .tl-item .tl-year { font-size:0.5rem; color:#8877cc; letter-spacing:2px; }
+  .tl-item .tl-text { font-size:0.62rem; color:#aabbdd; }
+
+  /* Now Playing */
+  .now-playing { display:flex; align-items:center; gap:14px; }
+  .now-art { width:48px; height:48px; border-radius:6px; flex-shrink:0; background:linear-gradient(135deg,#1a2a4a,#0a1a3a); border:1px solid rgba(80,180,255,0.3); display:flex; align-items:center; justify-content:center; font-size:1.4rem; box-shadow:0 0 12px rgba(60,160,255,0.2); }
+  .now-info { flex:1; }
+  .now-title { font-size:0.7rem; color:#88ccff; font-weight:700; }
+  .now-sub   { font-size:0.55rem; color:#4477aa; margin-top:2px; }
+  .now-bar   { margin-top:6px; height:2px; background:rgba(80,180,255,0.15); border-radius:1px; }
+  .now-fill  { height:100%; width:60%; background:linear-gradient(90deg,#4488ff,#88ccff); border-radius:1px; box-shadow:0 0 6px rgba(80,180,255,0.5); }
+
+  /* Footer */
+  .footer-preview { background:linear-gradient(180deg,#060c1a,#020610); border:1px solid rgba(80,60,160,0.3); border-radius:8px; padding:16px; text-align:center; position:relative; overflow:hidden; }
+  .meteor-line { position:absolute; width:1px; height:40px; background:linear-gradient(180deg,rgba(200,170,255,0.8),transparent); animation:fall 3s ease-in infinite; }
+  .ml1 { top:-10px; left:20%; animation-delay:0s; }
+  .ml2 { top:-10px; left:55%; animation-delay:1.2s; }
+  .ml3 { top:-10px; left:80%; animation-delay:2.1s; }
+  @keyframes fall { 0% { transform:translateY(0) rotate(15deg); opacity:1; } 100% { transform:translateY(80px) rotate(15deg); opacity:0; } }
+  .footer-title { font-size:0.9rem; color:#c8aaff; letter-spacing:4px; font-weight:900; }
+  .footer-sub   { font-size:0.55rem; color:#445577; letter-spacing:2px; margin-top:6px; }
+</style>
+</head>
+<body>
+
+<h2>FULL TRANSFORMATION PREVIEW</h2>
+<p class="sub">Genshin Impact × Wuthering Waves × SAO</p>
+
+<div class="hero-preview">
+  <div class="hero-topbar"></div>
+  <div class="resonance-ring rr1"></div>
+  <div class="resonance-ring rr2"></div>
+  <div class="resonance-ring rr3"></div>
+  <div class="hero-name">ALLEN</div>
+  <div class="hero-subtitle">✦ TRAVELER · RESONATOR · SWORDSMAN · CHEMIST ✦</div>
+  <div class="hero-badges">
+    <span class="badge">⚗️ Chemist</span>
+    <span class="badge">⚡ Dev</span>
+    <span class="badge">👑 Elden Lord</span>
+    <span class="badge">🌌 Traveler</span>
+    <span class="badge">🦈 Pull Shark</span>
+  </div>
+</div>
+
+<div class="panel-label"><span>// about</span></div>
+<div class="bento g3">
+  <div class="block holo span2">
+    <h3>Who am I?</h3>
+    <p>A developer and chemist passionate about building elegant tools, exploring open-source ecosystems, and diving deep into game lore.</p>
+  </div>
+  <div class="block gold">
+    <h3>Currently</h3>
+    <p>Studying, building, and leveling up one commit at a time.</p>
+  </div>
+</div>
+
+<div class="panel-label"><span>// skills</span></div>
+<div class="bento g3">
+  <div class="block resonance">
+    <h3>Languages</h3>
+    <ul><li>Python</li><li>JavaScript / TypeScript</li><li>Dart / Flutter</li><li>Java</li></ul>
+  </div>
+  <div class="block holo">
+    <h3>Tools</h3>
+    <ul><li>React / Next.js</li><li>Docker</li><li>Git &amp; Actions</li></ul>
+  </div>
+  <div class="block gold">
+    <h3>GitHub</h3>
+    <p style="color:#ffdd88;font-size:0.8rem;font-weight:900">★ Loading…</p>
+  </div>
+</div>
+
+<div class="panel-label"><span>// collection</span></div>
+<div class="section-preview gold-s">
+  <h3>🎮 FAVORITES</h3>
+  <div class="fav-grid">
+    <div class="fav-card"><span>⚔️</span>Elden Ring</div>
+    <div class="fav-card"><span>🌊</span>Wuthering Waves</div>
+    <div class="fav-card"><span>✨</span>Genshin Impact</div>
+    <div class="fav-card"><span>🗡️</span>SAO</div>
+    <div class="fav-card"><span>💜</span>+ more</div>
+  </div>
+</div>
+
+<div class="panel-label"><span>// journey</span></div>
+<div class="section-preview resonance-s">
+  <h3>📜 RESONANCE LOG</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2020</div><div class="tl-text">First line of code — unlocked: Developer</div></div>
+    <div class="tl-item"><div class="tl-year">2022</div><div class="tl-text">First open source PR — Pull Shark acquired</div></div>
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-text">chem.github.io launched — Chemist + Dev combined</div></div>
+    <div class="tl-item"><div class="tl-year">NOW</div><div class="tl-text">Building in the open. Resonance level: MAX</div></div>
+  </div>
+</div>
+
+<div class="panel-label"><span>// status</span></div>
+<div class="section-preview holo-s">
+  <h3>🌸 NOW PLAYING</h3>
+  <div class="now-playing">
+    <div class="now-art">🎵</div>
+    <div class="now-info">
+      <div class="now-title">Wuthering Waves OST</div>
+      <div class="now-sub">Currently exploring · Resonator mode</div>
+      <div class="now-bar"><div class="now-fill"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-preview">
+  <div class="meteor-line ml1"></div>
+  <div class="meteor-line ml2"></div>
+  <div class="meteor-line ml3"></div>
+  <div class="footer-title">✦ LET'S CONNECT</div>
+  <div class="footer-sub">built with resonance and too much caffeine</div>
+</div>
+
+</body>
+</html>
