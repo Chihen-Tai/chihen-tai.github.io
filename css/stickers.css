@@ -1,0 +1,41 @@
+/* css/stickers.css */
+
+/* LEFT NAV */
+.sticker-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.sticker {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 3px solid var(--sticker-border);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; cursor: pointer; background: none;
+  transition: transform var(--duration-normal) var(--ease-out-expo), box-shadow var(--duration-normal);
+}
+.sticker:hover {
+  transform: scale(1.12) rotate(-4deg);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55), 0 0 20px rgba(200,150,255,0.45);
+}
+.sticker:focus-visible { outline: 2px solid #aabbff; outline-offset: 3px; }
+.sticker-label { font-size: 0.55rem; color: var(--text-muted); text-align: center; letter-spacing: 1px; }
+
+.sticker-wiz  { background: linear-gradient(160deg,#2a1060,#4a1a88); border-color:#cc88ff; }
+.sticker-bot  { background: linear-gradient(160deg,#0a2040,#1a3a60); border-color:#44bbff; }
+.sticker-chem { background: linear-gradient(160deg,#102820,#1a4030); border-color:#44ffaa; }
+.sticker-sword{ background: linear-gradient(160deg,#3a1010,#5a2020); border-color:#ff7755; }
+.sticker-mail { background: linear-gradient(160deg,#101a40,#1a2a60); border-color:#ffcc44; }
+
+/* RIGHT DECO */
+.deco-sticker {
+  width: 66px; height: 66px; border-radius: 14px;
+  border: 3px solid var(--sticker-border);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.9rem; cursor: default;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+.deco-sticker:hover { transform: scale(1.1) rotate(3deg); }
+
+.deco-moon   { background: linear-gradient(160deg,#1a1050,#2a1870); border-color:#bb99ff; }
+.deco-wave   { background: linear-gradient(160deg,#0a1830,#102240); border-color:#66aaff; }
+.deco-spark  { background: linear-gradient(160deg,#201040,#301860); border-color:#ee88ff; }
+.deco-leaf   { background: linear-gradient(160deg,#102010,#182e18); border-color:#55ee99; }
+.deco-sakura { background: linear-gradient(160deg,#1e0820,#2e1030); border-color:#ff88dd; }
