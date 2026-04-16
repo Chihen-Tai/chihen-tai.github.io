@@ -53,6 +53,15 @@ body {
 }
 .nav-links a:hover { color: var(--text-gold); }
 
+/* GRIMOIRE TYPOGRAPHY — Cinzel on all headings */
+h1, h2, h3, .hero-name, .section-label .label-text, .nav-logo {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+}
+.section-label .label-text {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 /* STICKER SIDEBARS */
 #sticker-nav-left, #sticker-deco-right {
   position: fixed; top: 50%; transform: translateY(-50%);
