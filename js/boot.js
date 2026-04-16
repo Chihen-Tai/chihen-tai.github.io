@@ -5,7 +5,7 @@
   var burst  = document.getElementById('loading-burst');
 
   // Phase 1: Gold radial particle burst (0–0.8s)
-  var COLORS = ['#ffdd88', '#ffcc44', '#fff8cc', '#c8aaff', '#88ccff'];
+  var COLORS = ['#cc44ff', '#9933cc', '#440066', '#e8e0ff', '#cc44ff'];
   var COUNT  = 28;
   for (var i = 0; i < COUNT; i++) {
     var p = document.createElement('div');
@@ -22,9 +22,9 @@
   // Phase 2: Typed.js 3-line sequence (starts at 0.8s)
   setTimeout(function () {
     var lines = [
-      '<span style="color:#88ccff">LOADING TRAVELER DATA...<br></span>',
-      '<span style="color:#c8aaff">RESONANCE SYNCHRONIZED<br></span>',
-      '<span style="color:#ffdd88">WELCOME BACK, ALLEN ✦</span>',
+      '<span style="color:#9933cc">BINDING THE RITUAL...<br></span>',
+      '<span style="color:#cc44ff">INSCRIBING THE SEAL...<br></span>',
+      '<span style="color:#e8e0ff">SUMMONING COMPLETE ⚔</span>',
     ];
     new Typed(el, {
       strings: [lines.join('')],
@@ -40,7 +40,7 @@
           setTimeout(function () {
             screen.style.display = 'none';
             var sub = document.querySelector('.hero-sub');
-            if (sub) sub.textContent = '✦ TRAVELER · RESONATOR · SWORDSMAN · CHEMIST · ELDEN LORD ✦';
+            if (sub) sub.textContent = '⚔ SOFTWARE SORCERER · FULL-STACK MAGE · CODE ARCHITECT ⚔';
           }, 500);
         }, 300);
       }
