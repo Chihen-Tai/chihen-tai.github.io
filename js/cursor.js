@@ -2,8 +2,8 @@
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var GLYPHS = ['◈', '✦', '◆', '✧', '◈', '✦'];
-  var COLORS = ['#ffdd88', '#88ccff', '#c8aaff', '#fff8cc', '#ffdd88', '#88ccff'];
+  var GLYPHS = ['⚔', '✦', '◈', '᛫', '⚔', '✦'];
+  var COLORS = ['#cc44ff', '#9933cc', '#e8e0ff', '#cc44ff', '#7700aa', '#cc44ff'];
   var MAX    = 20;
   var active = 0;
   var tick   = 0;
