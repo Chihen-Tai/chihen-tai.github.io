@@ -4,7 +4,7 @@
   var el     = document.getElementById('loading-text');
   var burst  = document.getElementById('loading-burst');
 
-  // Phase 1: Gold radial particle burst (0–0.8s)
+  // Phase 1: Purple radial particle burst (0–0.8s)
   var COLORS = ['#cc44ff', '#9933cc', '#440066', '#e8e0ff', '#cc44ff'];
   var COUNT  = 28;
   for (var i = 0; i < COUNT; i++) {
