@@ -177,22 +177,8 @@ h1, h2, h3, .hero-name, .section-label .label-text, .nav-logo {
 /* CONTENT SECTIONS */
 .content-section { padding: 48px 100px 0; max-width: 1100px; margin: 0 auto; }
 
-/* SAO-style section divider label */
-.section-label {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 0.58rem; letter-spacing: 4px;
-  text-transform: uppercase; font-weight: normal;
-  margin-bottom: 10px; color: var(--text-holo);
-}
-.section-label::before {
-  content: ''; display: block; width: 3px; height: 14px;
-  background: linear-gradient(180deg, var(--text-holo), #4466ff);
-  border-radius: 2px; flex-shrink: 0;
-}
-.section-label::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, rgba(100,180,255,0.4), transparent);
-}
+/* Section label base — grimoire style defined above */
+.section-label { font-size: 0.58rem; font-weight: normal; color: var(--text-holo); }
 
 /* BENTO GRID */
 .bento-grid { display: grid; gap: 10px; margin-bottom: 32px; }
