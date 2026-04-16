@@ -51,7 +51,7 @@ body {
   color: #aabbcc; text-decoration: none; font-size: 0.75rem;
   letter-spacing: 3px; transition: color var(--duration-fast);
 }
-.nav-links a:hover { color: var(--text-gold); }
+.nav-links a:hover { color: var(--text-holo); }
 
 /* GRIMOIRE TYPOGRAPHY — Cinzel on all headings */
 h1, h2, h3, .hero-name, .section-label .label-text, .nav-logo {
@@ -60,6 +60,20 @@ h1, h2, h3, .hero-name, .section-label .label-text, .nav-logo {
 .section-label .label-text {
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.section-label {
+  position: relative;
+  margin-bottom: 32px;
+}
+.section-label::after {
+  content: '── ᚠ ──';
+  display: block;
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(160,40,255,0.45);
+  letter-spacing: 0.4em;
+  margin-top: 8px;
 }
 
 /* STICKER SIDEBARS */
@@ -151,11 +165,13 @@ h1, h2, h3, .hero-name, .section-label .label-text, .nav-logo {
 }
 .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
 .badge {
-  background: rgba(100,80,200,0.3); border: 1px solid rgba(180,150,255,0.4);
-  border-radius: 4px; padding: 4px 14px;
-  font-size: clamp(0.58rem,1vw,0.7rem); color: #c8d8ff;
-  box-shadow: 0 0 8px rgba(140,100,255,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
-  letter-spacing: 1px;
+  background: rgba(20,0,40,0.8);
+  border: 1px solid rgba(160,40,255,0.4);
+  border-radius: 3px;
+  padding: 4px 14px;
+  font-size: 0.65rem;
+  color: #cc88ff;
+  letter-spacing: 0.08em;
 }
 
 /* CONTENT SECTIONS */
@@ -201,21 +217,39 @@ h1, h2, h3, .hero-name, .section-label .label-text, .nav-logo {
               box-shadow var(--duration-normal);
 }
 .bento-block::before {
-  content: '◈'; position: absolute; top: 8px; right: 10px;
-  font-size: 0.55rem; opacity: 0.3; pointer-events: none;
+  content: 'ᚠ';
+  position: absolute;
+  top: 8px; left: 10px;
+  font-size: 0.6rem;
+  color: rgba(160,40,255,0.35);
+  pointer-events: none;
 }
 .bento-block::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
-  transform: translateX(-100%);
-  transition: transform 0.55s ease;
+  content: 'ᚱ';
+  position: absolute;
+  bottom: 8px; right: 10px;
+  font-size: 0.6rem;
+  color: rgba(160,40,255,0.35);
+  pointer-events: none;
 }
 .bento-block:hover { transform: translateY(-3px); }
-.bento-block:hover::after { transform: translateX(100%); }
 
-.bento-block ul { list-style: none; margin-top: 4px; }
-.bento-block ul li { font-size: 0.68rem; padding: 2px 0; line-height: 1.5; }
-.bento-block ul li::before { content: '◆ '; font-size: 0.5rem; opacity: 0.5; }
+.bento-block ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.bento-block ul li {
+  background: rgba(30,0,50,0.8);
+  border: 1px solid rgba(160,40,255,0.35);
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  color: #cc88ff;
+  letter-spacing: 0.05em;
+}
 
 /* GOLD panel */
 .bento-block.gold {
@@ -254,14 +288,19 @@ h1, h2, h3, .hero-name, .section-label .label-text, .nav-logo {
 #favorites { padding: 48px 100px 0; max-width: 1100px; margin: 0 auto; }
 .fav-grid { display: flex; gap: 10px; flex-wrap: wrap; }
 .fav-card {
-  background: rgba(255,200,60,0.08); border: 1px solid var(--border-gold);
-  border-radius: 6px; padding: 10px 16px;
-  font-size: 0.65rem; color: var(--text-gold); letter-spacing: 1px;
-  display: flex; align-items: center; gap: 8px; cursor: default;
-  transition: transform var(--duration-normal) var(--ease-out-expo),
-              box-shadow var(--duration-normal);
+  background: rgba(15,0,25,0.8);
+  border: 1px solid rgba(160,40,255,0.3);
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 0.75rem;
+  color: #cc88ff;
+  letter-spacing: 0.05em;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
 }
-.fav-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255,180,30,0.25); }
+.fav-card:hover {
+  border-color: rgba(180,60,255,0.6);
+  box-shadow: 0 0 12px rgba(140,0,200,0.25);
+}
 
 /* RESONANCE TIMELINE */
 #journey { padding: 48px 100px 0; max-width: 1100px; margin: 0 auto; }
