@@ -1,50 +1,54 @@
-/* css/tokens.css — Genshin Impact × Wuthering Waves × SAO palette */
+/* css/tokens.css — Dark Fantasy Grimoire palette */
 :root {
   /* Base */
-  --bg-base:              #060c1a;
-  --bg-nav:               rgba(4,8,24,0.97);
-  --bg-footer:            #030610;
+  --bg-base:              #08000f;
+  --bg-nav:               rgba(8,0,15,0.97);
+  --bg-footer:            #050008;
 
-  /* Gold panel (Genshin Impact) */
-  --bg-gold:              #1a1400;
-  --bg-gold-alt:          #221a00;
-  --border-gold:          rgba(255,200,60,0.35);
-  --glow-gold:            rgba(255,180,30,0.14);
-  --text-gold:            #ffdd88;
-  --text-gold-sub:        #cc9922;
+  /* Cursed purple panel (primary) */
+  --bg-gold:              #0f0018;
+  --bg-gold-alt:          #180020;
+  --border-gold:          rgba(160,40,255,0.35);
+  --glow-gold:            rgba(140,0,200,0.18);
+  --text-gold:            #cc88ff;
+  --text-gold-sub:        #9933cc;
 
-  /* Holo panel (SAO) */
-  --bg-holo:              #030d1f;
-  --bg-holo-alt:          #061428;
-  --border-holo:          rgba(80,180,255,0.35);
-  --glow-holo:            rgba(60,160,255,0.15);
-  --text-holo:            #88ccff;
-  --text-holo-sub:        #4477aa;
+  /* Void panel (secondary) */
+  --bg-holo:              #0a000f;
+  --bg-holo-alt:          #120018;
+  --border-holo:          rgba(180,60,255,0.3);
+  --glow-holo:            rgba(160,40,220,0.15);
+  --text-holo:            #cc44ff;
+  --text-holo-sub:        #7722aa;
 
-  /* Resonance panel (Wuthering Waves) */
-  --bg-resonance:         #110a28;
-  --bg-resonance-alt:     #180e38;
-  --border-resonance:     rgba(160,100,255,0.4);
-  --glow-resonance:       rgba(140,80,255,0.18);
-  --text-resonance:       #c8aaff;
-  --text-resonance-sub:   #8866bb;
+  /* Blood panel (accent) */
+  --bg-resonance:         #120005;
+  --bg-resonance-alt:     #1a0008;
+  --border-resonance:     rgba(180,30,60,0.4);
+  --glow-resonance:       rgba(160,0,40,0.18);
+  --text-resonance:       #ff6677;
+  --text-resonance-sub:   #cc2233;
+
+  /* Blood red tokens */
+  --blood-bright:         #ff4455;
+  --blood-dim:            #cc2233;
 
   /* Hero gradient stops */
-  --hero-gold:            #ffdd88;
-  --hero-white:           #fff8cc;
-  --hero-purple:          #c8aaff;
-  --hero-blue:            #88ccff;
+  --hero-gold:            #cc88ff;
+  --hero-white:           #f0e0ff;
+  --hero-purple:          #9933cc;
+  --hero-blue:            #cc44ff;
 
   /* Nav */
-  --logo-color:           #ffdd88;
-  --border-nav:           rgba(80,180,255,0.3);
+  --logo-color:           #cc88ff;
+  --border-nav:           rgba(160,40,255,0.3);
 
   /* Text */
-  --text-primary:         #e8f0ff;
-  --text-muted:           #6688aa;
+  --text-primary:         #e8e0ff;
+  --text-muted:           #664488;
 
   /* Stickers */
-  --sticker-border:       rgba(255,255,255,0.6);
+  --sticker-border:       rgba(200,150,255,0.6);
 
   /* Timing */
   --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
