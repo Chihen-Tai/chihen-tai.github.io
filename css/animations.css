@@ -3,9 +3,9 @@
 /* RESONANCE RINGS — gold / blue / purple */
 @keyframes ring-rotate-cw  { from { transform: rotate(0deg);    } to { transform: rotate(360deg);  } }
 @keyframes ring-rotate-ccw { from { transform: rotate(0deg);    } to { transform: rotate(-360deg); } }
-.ring-outer { animation: ring-rotate-cw  18s linear infinite; }
-.ring-mid   { animation: ring-rotate-ccw 11s linear infinite; }
-.ring-inner { animation: ring-rotate-cw   6s linear infinite; }
+.ring-outer { animation: ring-rotate-cw  20s linear infinite; }
+.ring-mid   { animation: ring-rotate-ccw 30s linear infinite; }
+.ring-inner { animation: ring-rotate-cw   8s linear infinite; }
 
 /* BENTO SCROLL-IN initial state — GSAP drives the reveal */
 .bento-block { opacity: 0; transform: translateY(28px); }
@@ -48,18 +48,18 @@
 }
 .sticker.active { animation: sticker-pulse 2s ease-in-out infinite; }
 
-/* SAKURA / GOLD PETAL DRIFT */
-@keyframes petal-drift {
-  0%   { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 0.6; }
-  100% { transform: translateY(110vh) translateX(var(--sway)) rotate(var(--spin)); opacity: 0; }
+/* EMBER / ASH FLOAT */
+@keyframes ember-float {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--peak-opacity); }
+  50%  { transform: translateY(calc(var(--rise) * -0.5)) translateX(var(--sway)) rotate(180deg); opacity: var(--peak-opacity); }
+  85%  { opacity: 0.3; }
+  100% { transform: translateY(var(--rise)) translateX(calc(var(--sway) * -0.3)) rotate(var(--spin)); opacity: 0; }
 }
-.petal {
-  position: fixed; top: -20px; pointer-events: none; z-index: 5;
-  width: 8px; height: 8px; border-radius: 50% 0 50% 0;
-  background: rgba(255,200,150,0.35);
-  animation: petal-drift var(--dur) ease-in var(--delay) infinite;
+.ember {
+  position: fixed; bottom: -20px; pointer-events: none; z-index: 5;
+  border-radius: 50%;
+  animation: ember-float var(--dur) ease-in-out var(--delay) infinite;
 }
 
 /* SPARKLE CURSOR TRAIL */
@@ -91,7 +91,7 @@
   .meteor { animation: none; }
   .hero-content { animation: none; opacity: 1; }
   .bento-block { opacity: 1; transform: none; }
-  .petal { animation: none; display: none; }
+  .ember { animation: none; display: none; }
   .sticker.active { animation: none; }
   #deco-moon, #deco-wave, #deco-spark, #deco-leaf, #deco-sakura { animation: none; }
 }
