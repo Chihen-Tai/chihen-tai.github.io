@@ -13,9 +13,9 @@
 
   var TOTAL = 900;
   var groups = [
-    { count: Math.round(TOTAL * 0.70), color: 0xffffff, size: 0.016 },
-    { count: Math.round(TOTAL * 0.20), color: 0xffdd88, size: 0.018 },
-    { count: Math.round(TOTAL * 0.10), color: 0x88ccff, size: 0.017 },
+    { count: Math.round(TOTAL * 0.65), color: 0x9933cc, size: 0.016 },
+    { count: Math.round(TOTAL * 0.25), color: 0xcc44ff, size: 0.018 },
+    { count: Math.round(TOTAL * 0.10), color: 0x440066, size: 0.017 },
   ];
 
   groups.forEach(function (g) {
@@ -27,7 +27,7 @@
     }
     var geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    var mat = new THREE.PointsMaterial({ color: g.color, size: g.size, transparent: true, opacity: 0.85 });
+    var mat = new THREE.PointsMaterial({ color: g.color, size: g.size, transparent: true, opacity: 0.6 });
     scene.add(new THREE.Points(geo, mat));
   });
 
