@@ -3,354 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Allen — Portfolio</title>
+  <title>Chih-en Tai — Chemistry &amp; Software</title>
+  <meta name="description" content="Chih-en Tai — B.Sc. Chemistry, National Tsing Hua University. Computational chemistry research (DFT / CASSCF) and software development." />
 
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/stickers.css" />
-
-  <!-- Three.js r128 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
-          integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu"
-          crossorigin="anonymous" defer></script>
-  <!-- GSAP 3.12.2 + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-          integrity="sha384-d+vyQ0dYcymoP8ndq2hW7FGC50nqGdXUEgoOUGxbbkAJwZqL7h+jKN0GGgn9hFDS"
-          crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-          integrity="sha384-poC0r6usQOX2Ayt/VGA+t81H6V3iN9L+Irz9iO8o+s0X20tLpzc9DOOtnKxhaQSE"
-          crossorigin="anonymous" defer></script>
-  <!-- Typed.js 2.0.12 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
-          integrity="sha384-NMn9+T8zIKnDUstqb5le7vdLNSyAgSU9DtEPT/b7ks9NJQpPk4Dc9b1tI8oyzimc"
-          crossorigin="anonymous" defer></script>
 </head>
 <body>
 
-  <!-- ─── Loading screen ─────────────────────────────────────────────────── -->
-  <div id="loading-screen">
-    <div id="loading-burst" aria-hidden="true"></div>
-    <div id="loading-text"></div>
-  </div>
-
-  <!-- ─── Navigation ────────────────────────────────────────────────────── -->
-  <nav id="main-nav" aria-label="Main navigation">
-    <a class="nav-logo" href="#hero">◈ ALLEN</a>
-    <ul class="nav-links" role="list">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#favorites">Collection</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- ─── Left sticker nav ──────────────────────────────────────────────── -->
-  <aside id="sticker-nav-left" aria-label="Section shortcuts">
-    <div class="sticker-wrap">
-      <button class="sticker" id="sticker-wiz"
-        onclick="scrollToSection('about')"
-        aria-label="Go to About section">🧙‍♀️</button>
+  <!-- ── Top bar ──────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top"><b>Chih-en Tai</b> / 戴致恩</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="sticker-wrap">
-      <button class="sticker" id="sticker-bot"
-        onclick="scrollToSection('projects')"
-        aria-label="Go to Projects section">🤖</button>
-    </div>
-    <div class="sticker-wrap">
-      <button class="sticker" id="sticker-chem"
-        onclick="scrollToSection('skills')"
-        aria-label="Go to Skills section">⚗️</button>
-    </div>
-    <div class="sticker-wrap">
-      <button class="sticker" id="sticker-sword"
-        onclick="scrollToSection('elden')"
-        aria-label="Go to Achievements section">⚔️</button>
-    </div>
-    <div class="sticker-wrap">
-      <button class="sticker" id="sticker-mail"
-        onclick="scrollToSection('contact')"
-        aria-label="Go to Contact section">✉️</button>
-    </div>
-  </aside>
+  </header>
 
-  <!-- ─── Right decorative stickers ────────────────────────────────────── -->
-  <aside id="sticker-deco-right" aria-hidden="true">
-    <div class="deco-sticker" id="deco-moon">🌙</div>
-    <div class="deco-sticker" id="deco-wave">🌊</div>
-    <div class="deco-sticker" id="deco-spark">✨</div>
-    <div class="deco-sticker" id="deco-leaf">🍀</div>
-    <div class="deco-sticker" id="deco-sakura">🌸</div>
-  </aside>
+  <main id="top">
 
-  <!-- ─── Main content ──────────────────────────────────────────────────── -->
-  <main>
-
-    <!-- Hero ──────────────────────────────────────────────────────────── -->
-    <section id="hero" aria-labelledby="hero-name">
-      <canvas id="star-canvas" aria-hidden="true"></canvas>
-
-      <div class="hero-rings" aria-hidden="true">
-        <div class="ring ring-outer"></div>
-        <div class="ring ring-mid"></div>
-        <div class="ring ring-inner"></div>
-      </div>
-
-      <div class="hero-content">
-        <h1 class="hero-name" id="hero-name">Allen</h1>
-        <p class="hero-sub"></p>
-        <div class="hero-badges" role="list" aria-label="Roles and interests">
-          <span class="badge" role="listitem">⚗️ Chemist</span>
-          <span class="badge" role="listitem">⚡ Dev</span>
-          <span class="badge" role="listitem">👑 Elden Lord</span>
-          <span class="badge" role="listitem">🌌 Traveler</span>
-          <span class="badge" role="listitem">🦈 Pull Shark</span>
-          <span class="badge" role="listitem">🌊 Resonator</span>
+    <!-- ── Hero ───────────────────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-name">
+      <div class="wrap">
+        <p class="eyebrow">B.Sc. Chemistry · National Tsing Hua University</p>
+        <h1 id="hero-name">Chih-en Tai</h1>
+        <p class="role">Computational chemist &amp; software developer</p>
+        <p class="summary">
+          Final-year chemistry undergraduate at National Tsing Hua University working at the
+          intersection of computational chemistry and software. My research centers on the
+          spectral simulation of transition-metal hydride complexes using DFT and CASSCF methods;
+          outside the lab I build open-source developer tools.
+        </p>
+        <div class="hero-links">
+          <a href="https://github.com/Chihen-Tai" target="_blank" rel="noopener noreferrer">
+            <span class="k">github</span>/Chihen-Tai
+          </a>
+          <a href="mailto:microdaery@gmail.com">
+            <span class="k">email</span>microdaery@gmail.com
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- About ─────────────────────────────────────────────────────────── -->
-    <section id="about" class="content-section" aria-labelledby="about-label">
-      <h2 class="section-label" id="about-label"><span class="label-text">ABOUT</span></h2>
-      <div class="bento-grid grid-3">
-        <div class="bento-block holo span-2">
-          <h2>Who am I?</h2>
-          <p>
-            A developer and chemist passionate about building elegant tools,
-            exploring open-source ecosystems, and diving deep into game lore.
+    <!-- ── About ──────────────────────────────────────────────────────── -->
+    <section id="about" class="wrap section" aria-labelledby="about-label">
+      <h2 class="section-label" id="about-label"><span class="num">01</span>About</h2>
+      <div class="section-body">
+        <p class="lead">
+          I am driven by problems that sit between disciplines — applying numerical methods and
+          quantum-chemical calculations to real chemical systems, and writing the software that
+          makes those workflows faster and more reproducible. I work primarily in Python, with
+          C/C++ and Java for performance-sensitive and systems work.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Education ──────────────────────────────────────────────────── -->
+    <section id="education" class="wrap section" aria-labelledby="edu-label">
+      <h2 class="section-label" id="edu-label"><span class="num">02</span>Education</h2>
+      <div class="section-body">
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">National Tsing Hua University</span>
+            <span class="entry-meta">Jul 2022 – Jun 2026</span>
+          </div>
+          <p class="entry-sub">Bachelor of Science in Chemistry</p>
+          <p class="entry-desc">Expected graduation: <code>Jun 2026</code> · Coursework in physical, organic, and computational chemistry.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Research ───────────────────────────────────────────────────── -->
+    <section id="research" class="wrap section" aria-labelledby="research-label">
+      <h2 class="section-label" id="research-label"><span class="num">03</span>Research</h2>
+      <div class="section-body">
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Undergraduate Researcher</span>
+            <span class="entry-meta">Jul 2024 – Jul 2025</span>
+          </div>
+          <p class="entry-sub">National Tsing Hua University</p>
+          <p class="entry-desc">
+            Spectral simulation of molecules containing a diiron trihydride motif, based on
+            <code>DFT</code> and <code>CASSCF</code> calculations.
           </p>
         </div>
-        <div class="bento-block gold">
-          <h2>Currently</h2>
-          <p>Studying, building, and leveling up one commit at a time.</p>
+      </div>
+    </section>
+
+    <!-- ── Projects ───────────────────────────────────────────────────── -->
+    <section id="projects" class="wrap section" aria-labelledby="projects-label">
+      <h2 class="section-label" id="projects-label"><span class="num">04</span>Projects</h2>
+      <div class="section-body">
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">MicrodaerysTranslatorMod</span>
+            <span class="entry-meta">Contributor</span>
+          </div>
+          <p class="entry-desc">A Minecraft mod that uses AI to provide real-time translation.</p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">Screenshot-inbox</span>
+            <span class="entry-meta">Contributor</span>
+          </div>
+          <p class="entry-desc">A macOS tool that organizes your screenshots.</p>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">The Kitchen Game</span>
+            <span class="entry-meta">Final Project</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <span class="entry-title">The Ball Game</span>
+            <span class="entry-meta">Final Project</span>
+          </div>
+        </div>
+
+        <h3 class="section-label" style="margin:2.4rem 0 0.6rem;">Selected repositories</h3>
+        <div id="repos">
+          <p class="entry-desc" style="margin-top:0;">Loading from GitHub…</p>
         </div>
       </div>
     </section>
 
-    <!-- Projects ──────────────────────────────────────────────────────── -->
-    <section id="projects" class="content-section" aria-labelledby="projects-label">
-      <h2 class="section-label" id="projects-label"><span class="label-text">PROJECTS</span></h2>
-      <div class="bento-grid grid-2" id="projects-grid">
-        <!-- Populated dynamically by js/github.js -->
-      </div>
-    </section>
-
-    <!-- Skills ────────────────────────────────────────────────────────── -->
-    <section id="skills" class="content-section" aria-labelledby="skills-label">
-      <h2 class="section-label" id="skills-label"><span class="label-text">SKILLS &amp; INTERESTS</span></h2>
-      <div class="bento-grid grid-3-eq">
-        <div class="bento-block resonance">
-          <h2>Languages</h2>
-          <ul>
-            <li>Python</li>
-            <li>JavaScript / TypeScript</li>
-            <li>Java</li>
-            <li>Dart / Flutter</li>
-          </ul>
+    <!-- ── Skills ─────────────────────────────────────────────────────── -->
+    <section id="skills" class="wrap section" aria-labelledby="skills-label">
+      <h2 class="section-label" id="skills-label"><span class="num">05</span>Skills</h2>
+      <div class="section-body">
+        <div class="skill-group">
+          <span class="skill-key">Programming</span>
+          <div class="chips">
+            <span class="chip">C / C++</span>
+            <span class="chip">Java</span>
+            <span class="chip">Python</span>
+          </div>
         </div>
-        <div class="bento-block holo">
-          <h2>Tools &amp; Frameworks</h2>
-          <ul>
-            <li>React / Next.js</li>
-            <li>Node.js</li>
-            <li>Git &amp; GitHub Actions</li>
-            <li>Docker</li>
-          </ul>
+        <div class="skill-group">
+          <span class="skill-key">Tools</span>
+          <div class="chips">
+            <span class="chip">Microsoft Office</span>
+            <span class="chip">AI agents</span>
+          </div>
         </div>
-        <div class="bento-block gold">
-          <h2 id="github-stats">GitHub Stats</h2>
-          <p>Loading…</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Achievements ──────────────────────────────────────────────────── -->
-    <section id="elden" class="content-section" aria-labelledby="elden-label">
-      <h2 class="section-label" id="elden-label"><span class="label-text">ACHIEVEMENTS</span></h2>
-      <div class="bento-grid grid-2">
-        <div class="bento-block gold">
-          <h2>👑 ELDEN LORD</h2>
-          <p>Defeated every boss in Elden Ring. The fingers guide no more.</p>
-        </div>
-        <div class="bento-block resonance">
-          <h2>🦈 Pull Shark</h2>
-          <p>Merged pull requests that others have used. Contributions that matter.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Favorites Collection ──────────────────────────────────────────── -->
-    <section id="favorites" aria-labelledby="favorites-label">
-      <h2 class="section-label" id="favorites-label"><span class="label-text">COLLECTION</span></h2>
-      <div class="fav-grid">
-        <div class="fav-card"><span>⚔️</span>Elden Ring</div>
-        <div class="fav-card"><span>🌊</span>Wuthering Waves</div>
-        <div class="fav-card"><span>✨</span>Genshin Impact</div>
-        <div class="fav-card"><span>🗡️</span>Sword Art Online</div>
-        <div class="fav-card"><span>🤖</span>Evangelion</div>
-        <div class="fav-card"><span>🌌</span>Honkai: Star Rail</div>
-        <div class="fav-card"><span>🔮</span>Re:Zero</div>
-      </div>
-    </section>
-
-    <!-- Resonance Log Timeline ────────────────────────────────────────── -->
-    <section id="journey" aria-labelledby="journey-label">
-      <h2 class="section-label" id="journey-label"><span class="label-text">RESONANCE LOG</span></h2>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-year">2020</div>
-          <div class="tl-text">First line of code — unlocked: Developer</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2022</div>
-          <div class="tl-text">First open source PR merged — Pull Shark acquired</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2024</div>
-          <div class="tl-text">chem.github.io launched — Chemist + Dev synced</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">NOW</div>
-          <div class="tl-text">Building in the open. Resonance level: MAX ✦</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Now Playing / Status ──────────────────────────────────────────── -->
-    <section id="status" aria-labelledby="status-label">
-      <h2 class="section-label" id="status-label"><span class="label-text">NOW PLAYING</span></h2>
-      <div class="now-playing-card">
-        <div class="now-art">🎵</div>
-        <div class="now-info">
-          <div class="now-title">Wuthering Waves OST</div>
-          <div class="now-sub">Currently exploring · Resonator mode active</div>
-          <div class="now-bar"><div class="now-fill"></div></div>
+        <div class="skill-group">
+          <span class="skill-key">Languages</span>
+          <div class="chips">
+            <span class="chip">Chinese</span>
+            <span class="chip">English</span>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ─── Footer / Contact ──────────────────────────────────────────────── -->
-  <footer id="contact" aria-label="Contact">
-    <div class="meteor-shower" aria-hidden="true">
-      <span class="meteor m1"></span>
-      <span class="meteor m2"></span>
-      <span class="meteor m3"></span>
-      <span class="meteor m4"></span>
-    </div>
-
-    <div class="footer-content">
-      <p class="footer-title">✦ LET'S CONNECT</p>
-      <ul class="footer-links" role="list">
-        <li>
-          <a href="https://github.com/Chihen-Tai" target="_blank" rel="noopener noreferrer"
-             aria-label="GitHub profile">GitHub</a>
-        </li>
-        <li>
-          <a href="mailto:microdaery@gmail.com" aria-label="Send email">microdaery@gmail.com</a>
-        </li>
-        <li>
-          <span class="discord-text">Discord: Microdaery#1103</span>
-        </li>
-      </ul>
-      <button class="spell-btn" onclick="spawnSpell(this)" aria-label="Cast a spell">
-        ✦ DO NOT PRESS ✦
-      </button>
-      <p class="footer-sub">built with resonance and too much caffeine</p>
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-links" aria-label="Contact">
+        <a href="https://github.com/Chihen-Tai" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:microdaery@gmail.com">Email</a>
+      </nav>
+      <span class="footer-note">© 2026 Chih-en Tai</span>
     </div>
   </footer>
 
-  <!-- ─── Application scripts ───────────────────────────────────────────── -->
-  <script src="js/boot.js" defer></script>
-  <script src="js/stars.js" defer></script>
   <script src="js/github.js" defer></script>
-  <script src="js/scroll.js" defer></script>
-  <script src="js/cursor.js" defer></script>
-  <script src="js/petals.js" defer></script>
-
-  <style>
-    .spell-btn {
-      margin-top: 18px;
-      background: linear-gradient(135deg, #1a0840, #2a1060);
-      border: 1px solid #9944ee;
-      border-radius: 4px;
-      color: #cc88ff;
-      font-family: 'Courier New', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      padding: 10px 24px;
-      cursor: pointer;
-      transition: box-shadow 200ms, transform 150ms;
-      box-shadow: 0 0 14px rgba(180, 50, 255, 0.3);
-    }
-    .spell-btn:hover {
-      box-shadow: 0 0 28px rgba(220, 80, 255, 0.6);
-      transform: scale(1.05);
-    }
-    .spell-particle {
-      position: fixed; pointer-events: none;
-      font-size: 1.4rem; z-index: 9999;
-      animation: spell-fly 1.2s ease-out forwards;
-    }
-    @keyframes spell-fly {
-      0%   { opacity: 1; transform: translate(0,0) scale(1) rotate(0deg); }
-      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3) rotate(360deg); }
-    }
-    .spell-msg {
-      position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(0.6);
-      background: linear-gradient(135deg, #1a0840, #2a1060);
-      border: 2px solid #cc66ff; border-radius: 16px;
-      padding: 28px 48px; color: #ff88ff;
-      font-family: 'Courier New', monospace;
-      font-size: 1.2rem; letter-spacing: 4px; text-align: center;
-      box-shadow: 0 0 60px rgba(200, 50, 255, 0.6);
-      z-index: 9998; animation: spell-pop 1.8s ease-out forwards;
-      pointer-events: none;
-    }
-    @keyframes spell-pop {
-      0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-      20%  { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-      80%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-    }
-    .discord-text { color: #8899dd; font-size: 0.75rem; }
-  </style>
-
-  <script>
-    function scrollToSection(id) {
-      var target = document.getElementById(id);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function spawnSpell(btn) {
-      var emojis = ['✨','🌸','⚗️','🌙','💜','⚡','🔮','👑','🌌','🦄'];
-      var rect = btn.getBoundingClientRect();
-      var cx = rect.left + rect.width / 2;
-      var cy = rect.top  + rect.height / 2;
-      for (var i = 0; i < 18; i++) {
-        var p = document.createElement('span');
-        p.className = 'spell-particle';
-        p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        var angle = (i / 18) * 2 * Math.PI;
-        var dist  = 80 + Math.random() * 140;
-        p.style.left = cx + 'px';
-        p.style.top  = cy + 'px';
-        p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
-        p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-        document.body.appendChild(p);
-        p.addEventListener('animationend', function () { this.remove(); });
-      }
-      var msg = document.createElement('div');
-      msg.className = 'spell-msg';
-      msg.innerHTML = '✦ SPELL CAST ✦<br><span style="font-size:0.7rem;color:#bb99ff;letter-spacing:2px">thou art maidenless</span>';
-      document.body.appendChild(msg);
-      msg.addEventListener('animationend', function () { this.remove(); });
-    }
-  </script>
-
 </body>
 </html>
